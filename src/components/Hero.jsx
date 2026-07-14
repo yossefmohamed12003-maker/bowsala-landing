@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="absolute inset-x-0 -top-[8%] -bottom-[8%]">
         <motion.div
           className="h-full w-full bg-cover bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/hero.png)', backgroundPosition: 'center 35%', y: bgY }}
+          style={{ backgroundImage: 'url(/images/hero.webp)', backgroundPosition: 'center 35%', y: bgY }}
         />
       </div>
       <div
