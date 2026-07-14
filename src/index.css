@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bowsala — stand-in webfonts (specimens only; swap for the licensed
+   29LT Zarid Serif / Greta Sans faces on delivery — see README). */
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/newsreader-300-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/newsreader-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/newsreader-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/newsreader-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/newsreader-500-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/schibstedgrotesk-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/schibstedgrotesk-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/schibstedgrotesk-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/schibstedgrotesk-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibmplexmono-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibmplexmono-500-normal.woff2') format('woff2');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Arabic mode swaps in Cairo (display) + Tajawal (body/mono) so headline
+   weight and contrast match the English serif/sans pairing. Fonts are
+   fetched lazily by LanguageContext only once `lang="ar"` is set. Positive
+   letter-spacing breaks Arabic's cursive joining, so every `tracking-*`
+   utility (used throughout for the English overline/mono labels) is
+   neutralised for the whole Arabic scope rather than chased class-by-class. */
+[lang='ar'] {
+  letter-spacing: normal !important;
+}
+[lang='ar'] .font-serif {
+  font-family: 'Cairo', 'Tajawal', 'Segoe UI', sans-serif;
+}
+[lang='ar'] .font-sans {
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
+}
+[lang='ar'] .font-mono {
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
+}
+[lang='ar'] em.italic {
+  font-style: normal;
+}
+
+/* Offset anchor targets so content doesn't hide under the fixed nav */
+section[id],
+div[id] {
+  scroll-margin-top: 88px;
+}
+
+::selection {
+  background: #9F7B4B;
+  color: #FBFAF5;
+}

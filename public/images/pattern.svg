@@ -1,0 +1,29 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bowsala compass pattern tile">
+  
+  <defs>
+    <g id="rose" stroke="#3A3321" fill="none" stroke-width="1" stroke-linecap="round">
+      <circle cx="0" cy="0" r="26"></circle>
+      <path d="M0 -30 L4 -4 L0 0 L-4 -4 Z" fill="#3A3321" stroke="none" fill-opacity="0.5"></path>
+      <path d="M0 30 L-4 4 L0 0 L4 4 Z" fill="#3A3321" stroke="none" fill-opacity="0.5"></path>
+      <path d="M-30 0 L-4 -4 L0 0 L-4 4 Z" fill="#3A3321" stroke="none" fill-opacity="0.5"></path>
+      <path d="M30 0 L4 4 L0 0 L4 -4 Z" fill="#3A3321" stroke="none" fill-opacity="0.5"></path>
+      <line x1="-18" y1="-18" x2="18" y2="18" stroke-width="0.6"></line>
+      <line x1="18" y1="-18" x2="-18" y2="18" stroke-width="0.6"></line>
+    </g>
+  </defs>
+  <g stroke="#3A3321">
+    <use href="#rose" x="60" y="60"></use>
+    <use href="#rose" x="180" y="60"></use>
+    <use href="#rose" x="60" y="180"></use>
+    <use href="#rose" x="180" y="180"></use>
+    <use href="#rose" x="0" y="0"></use>
+    <use href="#rose" x="240" y="0"></use>
+    <use href="#rose" x="0" y="240"></use>
+    <use href="#rose" x="240" y="240"></use>
+    <use href="#rose" x="120" y="120"></use>
+    <use href="#rose" x="0" y="120"></use>
+    <use href="#rose" x="240" y="120"></use>
+    <use href="#rose" x="120" y="0"></use>
+    <use href="#rose" x="120" y="240"></use>
+  </g>
+</svg>
