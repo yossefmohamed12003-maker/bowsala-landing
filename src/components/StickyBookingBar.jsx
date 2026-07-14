@@ -40,28 +40,28 @@ export default function StickyBookingBar() {
           transition={{ duration: 0.4, ease: EASE }}
           className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-desert-night/90 px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:hidden"
         >
-          <div className="flex items-center justify-between gap-4">
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="relative flex h-1.5 w-1.5 flex-none">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sahara-gold opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold-soft" />
-                </span>
-                <span className="truncate font-mono text-[10px] uppercase text-gold-soft">{t.stickyCta.scarcity}</span>
-              </div>
-              <div className="mt-0.5 font-mono text-lg text-paper-pure">
-                {t.logistics.price.amount} <span className="text-xs text-gold-soft">{t.logistics.price.currency}</span>
-              </div>
+          <div className="flex flex-col gap-2.5">
+            <div className="flex items-start gap-1.5">
+              <span className="relative mt-1 flex h-1.5 w-1.5 flex-none">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sahara-gold opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold-soft" />
+              </span>
+              <span className="font-mono text-[11px] leading-snug text-gold-soft">{t.stickyCta.scarcity}</span>
             </div>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleClick}
-              className="flex-none whitespace-nowrap rounded-full bg-sahara-gold px-6 py-3 font-sans text-sm font-semibold text-paper-pure transition-transform duration-base ease-out active:scale-[0.96]"
-            >
-              {t.stickyCta.label}
-            </a>
+            <div className="flex items-center justify-between gap-4">
+              <div className="font-mono text-lg text-paper-pure">
+                {t.ticket.price.amount} <span className="text-xs text-gold-soft">{t.ticket.price.currency}</span>
+              </div>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className="flex-none whitespace-nowrap rounded-full bg-sahara-gold px-6 py-3 font-sans text-sm font-semibold text-paper-pure transition-transform duration-base ease-out active:scale-[0.96]"
+              >
+                {t.stickyCta.label}
+              </a>
+            </div>
           </div>
         </motion.div>
       )}

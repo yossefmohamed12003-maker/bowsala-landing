@@ -1,7 +1,18 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="ar" dir="rtl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <!-- Runs before first paint so returning visitors who chose English never see
+         a flash of the Arabic/RTL default before React hydrates and corrects it. -->
+    <script>
+      ;(function () {
+        try {
+          var l = localStorage.getItem('bowsala-lang') === 'en' ? 'en' : 'ar'
+          document.documentElement.lang = l
+          document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr'
+        } catch (e) {}
+      })()
+    </script>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +24,15 @@
          so it can't take loading="lazy" — the correct lever for the LCP element
          is the opposite, preloading it so it paints as early as possible. -->
     <link rel="preload" as="image" href="/images/hero.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Arabic is the default experience for all new visitors, so these fonts
+         are loaded unconditionally rather than lazily injected on toggle. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap"
+    />
 
     <!-- Google Tag Manager -->
     <script>

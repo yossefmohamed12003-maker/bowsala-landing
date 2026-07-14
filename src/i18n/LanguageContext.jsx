@@ -7,10 +7,16 @@ const LanguageContext = createContext(null)
 
 let arabicFontsInjected = false
 
-// Arabic display fonts are only fetched once a visitor actually switches to
-// Arabic, so the default English ad-traffic path pays zero extra font cost.
+// Arabic is the default experience, so index.html already includes a static
+// preconnect + stylesheet link for Cairo/Tajawal. This only exists as a
+// defensive fallback (e.g. if that markup is ever removed) — it checks for
+// the existing tag first so it never double-fetches the same stylesheet.
 function injectArabicFonts() {
   if (arabicFontsInjected || typeof document === 'undefined') return
+  if (document.querySelector('link[href*="fonts.googleapis.com/css2?family=Cairo"]')) {
+    arabicFontsInjected = true
+    return
+  }
   arabicFontsInjected = true
 
   const preconnectGoogle = document.createElement('link')
@@ -30,11 +36,13 @@ function injectArabicFonts() {
   document.head.append(preconnectGoogle, preconnectGstatic, stylesheet)
 }
 
+// Arabic is the default for all new visitors — only an explicit prior choice
+// of English (stored from a previous visit) overrides it.
 function readInitialLang() {
   try {
-    return localStorage.getItem(STORAGE_KEY) === 'ar' ? 'ar' : 'en'
+    return localStorage.getItem(STORAGE_KEY) === 'en' ? 'en' : 'ar'
   } catch {
-    return 'en'
+    return 'ar'
   }
 }
 
