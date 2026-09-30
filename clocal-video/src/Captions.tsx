@@ -10,15 +10,19 @@ const WordEl: React.FC<{ w: Word; t: number; fps: number }> = ({ w, t, fps }) =>
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
+  // Pure-English tokens (e.g. "Gawhar × Wound") read left-to-right inside the RTL line.
+  const dir = /[\u0600-\u06FF]/.test(w.text) ? undefined : "ltr";
   const base: React.CSSProperties = {
     display: "inline-block",
     opacity: p,
     transform: `translateY(${(1 - p) * 16}px)`,
     lineHeight: 1.25,
+    whiteSpace: "nowrap",
   };
   if (w.kind === "hl") {
     return (
       <span
+        dir={dir}
         style={{
           ...base,
           color: C.blue,
@@ -32,7 +36,7 @@ const WordEl: React.FC<{ w: Word; t: number; fps: number }> = ({ w, t, fps }) =>
     );
   }
   return (
-    <span style={{ ...base, color: w.kind === "tech" ? C.orange : C.cream }}>
+    <span dir={dir} style={{ ...base, color: w.kind === "tech" ? C.orange : C.cream }}>
       {w.text}
     </span>
   );

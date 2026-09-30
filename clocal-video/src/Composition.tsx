@@ -26,14 +26,15 @@ const PUNCH: [number, number][] = [
   [52.5, 1.18],
 ];
 
-// Gawhar × Wound lookbook cutaways (from the brand book): [start, end, file]
-const BROLL: [number, number, string][] = [
-  [20.166, 21.933, "p16_3"],
-  [21.933, 23.5, "p16_0"],
-  [24.966, 26.9, "p16_8"],
-  [28.766, 30.3, "p16_1"],
-  [30.3, 31.3, "p16_2"],
-  [37.9, 39.566, "p14_1"],
+// Gawhar × Wound cutaways from the brand book — flat mockup and white-studio shots only
+// (no lifestyle shots: they show the unreleased sweatpants). [start, end, file, fit]
+type Fit = "flat" | "studio" | "detail";
+const BROLL: [number, number, string, Fit][] = [
+  [20.166, 21.933, "p16_3", "flat"],
+  [21.933, 23.5, "p16_1", "studio"],
+  [24.966, 26.9, "p16_2", "studio"],
+  [28.766, 30.3, "p16_3", "detail"],
+  [30.3, 31.3, "p16_1", "detail"],
 ];
 
 const TalkingHead: React.FC = () => {
@@ -55,14 +56,21 @@ const TalkingHead: React.FC = () => {
   );
 };
 
-const Still: React.FC<{ file: string; dur: number }> = ({ file, dur }) => {
+const Still: React.FC<{ file: string; dur: number; fit: Fit }> = ({ file, dur, fit }) => {
   const frame = useCurrentFrame();
-  const z = interpolate(frame, [0, dur], [1.04, 1.12]);
+  // flat: whole tee on its white ground · studio: full look, cover · detail: push in on the print
+  const [z0, z1] = fit === "detail" ? [1.55, 1.7] : [1.02, 1.08];
   return (
-    <AbsoluteFill style={{ backgroundColor: C.ink, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: fit === "flat" ? "#FFFFFF" : C.ink, overflow: "hidden" }}>
       <Img
         src={staticFile(`broll/${file}.jpg`)}
-        style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${z})` }}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: fit === "flat" ? "contain" : "cover",
+          transform: `scale(${interpolate(frame, [0, dur], [z0, z1])})`,
+          transformOrigin: fit === "detail" ? "50% 38%" : "50% 50%",
+        }}
       />
     </AbsoluteFill>
   );
@@ -75,9 +83,9 @@ export const ClocalReel: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: C.ink }}>
       <TalkingHead />
 
-      {BROLL.map(([a, b, file]) => (
-        <Sequence key={file} name={`B-roll ${file}`} from={s(a)} durationInFrames={s(b) - s(a)} premountFor={fps}>
-          <Still file={file} dur={s(b) - s(a)} />
+      {BROLL.map(([a, b, file, fit]) => (
+        <Sequence key={a} name={`B-roll ${file}`} from={s(a)} durationInFrames={s(b) - s(a)} premountFor={fps}>
+          <Still file={file} dur={s(b) - s(a)} fit={fit} />
         </Sequence>
       ))}
 
@@ -87,10 +95,10 @@ export const ClocalReel: React.FC = () => {
         <WordCard tone="blue" words={["فاحنا", "رجعنا."]} stagger={9} />
       </Sequence>
       <Sequence name="Card: rebrand" from={s(8.966)} durationInFrames={s(10.0) - s(8.966)} premountFor={fps}>
-        <MarkCard tone="cream" mark="wordmark" color={C.blue} width={760} line="ري-براندينج أقوى" />
+        <MarkCard tone="cream" mark="wordmark" color={C.blue} width={760} line="rebranding أقوى" />
       </Sequence>
       <Sequence name="Card: الجمعة" from={s(23.5)} durationInFrames={s(24.966) - s(23.5)} premountFor={fps}>
-        <WordCard tone="blue" words={["الدروب", "الجاية", "يوم", "الجمعة."]} size={170} stagger={9} label="NEXT DROP — FRIDAY" />
+        <WordCard tone="blue" words={["الـdrop", "الجاية", "يوم", "الجمعة."]} size={170} stagger={9} label="NEXT DROP — FRIDAY" />
       </Sequence>
       <Sequence name="Card: EOS sale" from={s(31.3)} durationInFrames={s(32.566) - s(31.3)} premountFor={fps}>
         <LatinCard tone="cream" lines={["end of", "season", "sale."]} />
@@ -99,7 +107,7 @@ export const ClocalReel: React.FC = () => {
         <MarkCard tone="ink" mark="arabic" color={C.orange} width={720} />
       </Sequence>
       <Sequence name="Card: الهايب" from={s(53.7)} durationInFrames={s(55.1) - s(53.7)} premountFor={fps}>
-        <WordCard tone="blue" words={["البرودكتس", "بتاعتنا", "هي", "الهايب."]} size={150} stagger={8} />
+        <WordCard tone="blue" words={["الـproducts", "بتاعتنا", "هي", "الـhype."]} size={150} stagger={8} />
       </Sequence>
       <Sequence name="Outro" from={s(55.1)} premountFor={fps}>
         <MarkCard tone="cream" mark="wordmark" color={C.blue} width={760} footer="QUIET LUXURY IN THE STREETS" />

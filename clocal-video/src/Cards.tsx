@@ -55,7 +55,7 @@ export const WordCard: React.FC<{
               key={i}
               style={{ opacity: p, transform: `translateY(${(1 - p) * 30}px)`, display: "inline-block" }}
             >
-              {w}
+              {w.replace(/الـ(?=[A-Za-z])/g, "الـ ")}
             </span>
           );
         })}
