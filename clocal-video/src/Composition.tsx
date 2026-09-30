@@ -49,20 +49,15 @@ const TalkingHead: React.FC = () => {
           style={{ width: "100%", height: "100%", objectFit: "cover", filter: "url(#grade)" }}
         />
       </AbsoluteFill>
-      {/* Grade: deep true blacks (S-curve), natural skin — only a touch of the golden-hour
-          orange pulled back so skin reads clean rather than grey. */}
+      {/* Grade: light touch — stays close to the original footage, only a gentle
+          curve so the blacks sit a little deeper. */}
       <svg width="0" height="0" style={{ position: "absolute" }}>
         <filter id="grade" colorInterpolationFilters="sRGB">
           <feComponentTransfer>
-            <feFuncR type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
-            <feFuncG type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
-            <feFuncB type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
+            <feFuncR type="table" tableValues="0 0.085 0.2 0.34 0.505 0.655 0.795 0.91 1" />
+            <feFuncG type="table" tableValues="0 0.085 0.2 0.34 0.505 0.655 0.795 0.91 1" />
+            <feFuncB type="table" tableValues="0 0.085 0.2 0.34 0.505 0.655 0.795 0.91 1" />
           </feComponentTransfer>
-          <feColorMatrix
-            type="matrix"
-            values="0.96 0.03 0 0 0  0 1 0 0 0  0 0.02 1.02 0 0  0 0 0 1 0"
-          />
-          <feColorMatrix type="saturate" values="1.02" />
         </filter>
       </svg>
     </AbsoluteFill>
