@@ -44,14 +44,27 @@ const TalkingHead: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink }}>
       <AbsoluteFill style={{ transform: `scale(${scale})`, transformOrigin: "50% 24%" }}>
-        {/* Brand grade: cool-neutral, matte — pull the warm golden-hour cast down */}
         <Video
           src={staticFile("main.mp4")}
-          style={{ width: "100%", height: "100%", objectFit: "cover", filter: "saturate(0.8) contrast(0.93) brightness(1.03)" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", filter: "url(#grade)" }}
         />
       </AbsoluteFill>
-      <AbsoluteFill style={{ backgroundColor: "#5E6F86", mixBlendMode: "soft-light", opacity: 0.35 }} />
-      <AbsoluteFill style={{ backgroundColor: "#1A1A1A", mixBlendMode: "lighten", opacity: 0.5 }} />
+      {/* Grade: deep true blacks (S-curve), natural skin — only a touch of the golden-hour
+          orange pulled back so skin reads clean rather than grey. */}
+      <svg width="0" height="0" style={{ position: "absolute" }}>
+        <filter id="grade" colorInterpolationFilters="sRGB">
+          <feComponentTransfer>
+            <feFuncR type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
+            <feFuncG type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
+            <feFuncB type="table" tableValues="0 0.03 0.125 0.305 0.515 0.705 0.855 0.955 1" />
+          </feComponentTransfer>
+          <feColorMatrix
+            type="matrix"
+            values="0.96 0.03 0 0 0  0 1 0 0 0  0 0.02 1.02 0 0  0 0 0 1 0"
+          />
+          <feColorMatrix type="saturate" values="1.02" />
+        </filter>
+      </svg>
     </AbsoluteFill>
   );
 };
