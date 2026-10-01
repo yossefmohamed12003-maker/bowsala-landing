@@ -1,6 +1,6 @@
 import { Composition, Folder, Still } from "remotion";
 import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
-import { CountdownStory, DropStory } from "./stills/Stories";
+import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory } from "./stills/Stories";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -54,6 +54,27 @@ export const RemotionRoot: React.FC = () => {
         <Still
           id="StoryCountdown"
           component={CountdownStory}
+          width={1080}
+          height={1920}
+          defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+        <Still
+          id="StoryCountdownA"
+          component={CountdownA}
+          width={1080}
+          height={1920}
+          defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+        <Still
+          id="StoryCountdownB"
+          component={CountdownB}
+          width={1080}
+          height={1920}
+          defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+        <Still
+          id="StoryCountdownC"
+          component={CountdownC}
           width={1080}
           height={1920}
           defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
