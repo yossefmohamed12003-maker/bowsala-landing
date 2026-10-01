@@ -43,7 +43,7 @@ const Shot: React.FC<{ src: string; i: number; local: number }> = ({ src, i, loc
           objectFit: "cover",
           scale: interpolate(local, [0, CUT], [1.22, 1.08], { ...clamp, easing: OUT }),
           translate: `${interpolate(local, [0, 3], [dir * 140, 0], { ...clamp, easing: OUT }) + shakeX}px ${shakeY}px`,
-          filter: `blur(${interpolate(local, [0, 2.5], [10, 0], clamp)}px) brightness(0.78) contrast(1.18) saturate(0.85)`,
+          filter: `blur(${interpolate(local, [0, 2.5], [10, 0], clamp)}px) brightness(0.5) contrast(1.45) saturate(0.55)`,
         }}
       />
     </AbsoluteFill>
@@ -64,8 +64,10 @@ export const S2bStreet: React.FC<{ useFallback?: boolean }> = ({ useFallback = t
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink }}>
       <Shot src={shots[i]} i={i} local={local} />
+      {/* night grade: cool shadows */}
+      <AbsoluteFill style={{ backgroundColor: "#0B1030", mixBlendMode: "color", opacity: 0.35 }} />
       {/* vignette */}
-      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.7) 100%)" }} />
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 100%)" }} />
       {/* grain */}
       <AbsoluteFill
         style={{

@@ -17,10 +17,11 @@ export type TeaserProps = {
   readonly dayLabel: string;
   readonly timeLabel: string;
   readonly dropLabel: string;
+  readonly withMusic?: boolean;
 };
 
 // 120 BPM, every scene is one bar (60 frames) and every cut lands on a beat.
-export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel }) => {
+export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel, withMusic = true }) => {
   const { fps } = useVideoConfig();
   return (
     <AbsoluteFill style={{ backgroundColor: "#0A0A0A" }}>
@@ -58,7 +59,7 @@ export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel }
         <S8Finale dayLabel={dayLabel} timeLabel={timeLabel} />
       </Sequence>
       <Hud dropLabel={dropLabel} />
-      <Audio name="Music" src={staticFile("audio/teaser.wav")} premountFor={fps} />
+      {withMusic ? <Audio name="Music" src={staticFile("audio/teaser.wav")} premountFor={fps} /> : null}
     </AbsoluteFill>
   );
 };
