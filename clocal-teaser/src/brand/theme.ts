@@ -15,22 +15,26 @@ export const C = {
   hairline: "#E2D7C6",
 } as const;
 
-// Primary display face per the brand book is Satoshi (Black 900).
-// Satoshi isn't reachable from this environment; DM Sans (variable) stands in until
-// Satoshi-Variable.woff2 is dropped into public/fonts — then set DISPLAY_FILE below.
+// Headlines follow the live teaser posts: heavy, extended, uppercase ("THE NEW clocal").
+// Archivo (wdth 125, wght 900) matches that cut. Brand-book Satoshi is kept for sentence-case
+// fallback — drop Satoshi-Variable.woff2 into public/fonts and point DISPLAY_FILE at it.
 const DISPLAY_FILE = "fonts/DMSans-Variable.woff2";
 
-const variable = (family: string, file: string) =>
-  loadFont({ family, url: staticFile(file), weight: "100 1000", display: "block" });
+const variable = (family: string, file: string, stretch?: string) =>
+  loadFont({ family, url: staticFile(file), weight: "100 1000", display: "block", ...(stretch ? { stretch } : {}) });
 
+variable("ClocalHeadline", "fonts/Archivo-Variable.woff2", "62% 125%");
 variable("ClocalDisplay", DISPLAY_FILE);
 variable("Inter", "fonts/Inter-Variable.woff2");
 variable("Geist", "fonts/Geist-Variable.woff2");
+variable("Geist Mono", "fonts/GeistMono-Variable.woff2");
 
 export const F = {
+  headline: "ClocalHeadline, sans-serif",
   display: "ClocalDisplay, sans-serif",
   body: "Inter, sans-serif",
-  tech: "Geist, monospace",
+  tech: "Geist, sans-serif",
+  mono: "'Geist Mono', monospace",
 };
 
 // Snappy ease used for every slam/reveal.

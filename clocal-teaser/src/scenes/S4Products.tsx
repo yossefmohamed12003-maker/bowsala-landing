@@ -1,6 +1,6 @@
 import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
-import { C, F, OUT } from "../brand/theme";
-import { clamp, Flash, Hud, Label } from "../components/kit";
+import { C, OUT } from "../brand/theme";
+import { clamp, Flash, headline, Mono } from "../components/kit";
 
 // Product name as a window onto the garment: the photo only shows through the letters.
 // Implemented with a multiply layer (white text on black) so it renders reliably.
@@ -34,12 +34,7 @@ const Window: React.FC<{ word: string; photo: string; from: number; pan: [number
       >
         <div
           style={{
-            fontFamily: F.display,
-            fontWeight: 900,
-            fontSize: 270,
-            letterSpacing: "-0.05em",
-            lineHeight: 0.85,
-            color: "white",
+            ...headline(160, "white"),
             marginTop: top,
             scale: interpolate(frame, [0, 10, 30], [1.25, 1.02, 1], { ...clamp, easing: OUT }),
           }}
@@ -51,11 +46,7 @@ const Window: React.FC<{ word: string; photo: string; from: number; pan: [number
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
         <div
           style={{
-            fontFamily: F.display,
-            fontWeight: 900,
-            fontSize: 270,
-            letterSpacing: "-0.05em",
-            lineHeight: 0.85,
+            ...headline(160, "white"),
             color: "transparent",
             WebkitTextStroke: `2px ${C.cream}`,
             marginTop: top,
@@ -81,11 +72,10 @@ export const S4Products: React.FC = () => {
         <Window word="Wound" photo="photos/wound-model.jpg" from={30} pan={[-500, -700]} top={0} />
       )}
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-        <Label at={second ? 33 : 3} color={C.orange} size={30} style={{ marginTop: 420 }}>
-          {second ? "No. 02 — Wound" : "No. 01 — Gawhar"}
-        </Label>
+        <Mono at={second ? 33 : 3} color={C.cream} size={28} style={{ marginTop: 340 }}>
+          {second ? "NO. 02 / WOUND" : "NO. 01 / GAWHAR"}
+        </Mono>
       </AbsoluteFill>
-      <Hud tone="dark" index="04 / 07" />
       <Flash at={30} color={C.blue} frames={2} />
     </AbsoluteFill>
   );

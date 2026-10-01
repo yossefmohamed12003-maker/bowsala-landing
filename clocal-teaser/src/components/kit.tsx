@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { ARABIC_MARK, MONOGRAM, WORDMARK } from "../brand/marks";
 import { C, F, OUT } from "../brand/theme";
 
@@ -38,30 +38,37 @@ export const ArabicMark: React.FC<{ width: number; color: string; style?: React.
   <Vector mark={ARABIC_MARK} {...p} />
 );
 
-// A display word that slams up out of a mask on its frame.
+// Headline style from the live posts: heavy, extended, uppercase.
+export const headline = (size: number, color: string): React.CSSProperties => ({
+  fontFamily: F.headline,
+  fontWeight: 900,
+  fontStretch: "125%",
+  fontSize: size,
+  letterSpacing: "-0.02em",
+  textTransform: "uppercase",
+  lineHeight: 0.9,
+  color,
+  whiteSpace: "nowrap",
+});
+
+// A headline line that slams up out of a mask on its frame.
 export const Slam: React.FC<{
   at: number;
   children: React.ReactNode;
   size: number;
   color: string;
-  weight?: number;
   dur?: number;
   style?: React.CSSProperties;
-}> = ({ at, children, size, color, weight = 900, dur = 7, style }) => {
+}> = ({ at, children, size, color, dur = 7, style }) => {
   const frame = useCurrentFrame();
   if (frame < at) return null;
   return (
-    <div style={{ overflow: "hidden", lineHeight: 0.92, paddingBottom: size * 0.08, ...style }}>
+    <div style={{ overflow: "hidden", paddingBottom: size * 0.06, ...style }}>
       <div
         style={{
-          fontFamily: F.display,
-          fontWeight: weight,
-          fontSize: size,
-          letterSpacing: "-0.035em",
-          color,
-          whiteSpace: "nowrap",
-          translate: `0 ${interpolate(frame, [at, at + dur], [100, 0], { ...clamp, easing: OUT })}%`,
-          scale: interpolate(frame, [at, at + dur + 4], [1.12, 1], { ...clamp, easing: OUT }),
+          ...headline(size, color),
+          translate: `0 ${interpolate(frame, [at, at + dur], [105, 0], { ...clamp, easing: OUT })}%`,
+          scale: interpolate(frame, [at, at + dur + 4], [1.1, 1], { ...clamp, easing: OUT }),
           transformOrigin: "left bottom",
         }}
       >
@@ -71,8 +78,8 @@ export const Slam: React.FC<{
   );
 };
 
-// Geist technical label: always UPPERCASE, +0.16em tracking.
-export const Label: React.FC<{
+// Mono technical label (Geist Mono, uppercase) — the voice of the post overlays.
+export const Mono: React.FC<{
   children: React.ReactNode;
   color: string;
   size?: number;
@@ -84,11 +91,13 @@ export const Label: React.FC<{
   return (
     <div
       style={{
-        fontFamily: F.tech,
-        fontWeight: 500,
+        fontFamily: F.mono,
+        fontWeight: 400,
         fontSize: size,
-        letterSpacing: "0.16em",
+        letterSpacing: "0.04em",
+        lineHeight: 1.35,
         textTransform: "uppercase",
+        whiteSpace: "pre",
         color,
         opacity: interpolate(frame, [at, at + 2, at + 3, at + 4], [0, 1, 0.35, 1], clamp),
         ...style,
@@ -109,6 +118,32 @@ export const Punch: React.FC<{ hits: number[]; amount?: number; children: React.
   const last = hits.filter((h) => h <= frame).pop();
   const k = last === undefined ? 0 : Math.exp(-(frame - last) / 3.2);
   return <AbsoluteFill style={{ scale: 1 + amount * k }}>{children}</AbsoluteFill>;
+};
+
+// Campaign photo plate (warehouse set from the teaser posts) with slow push and a shade.
+export const Plate: React.FC<{
+  src: string;
+  shade?: number;
+  push?: [number, number];
+  frames?: number;
+  origin?: string;
+}> = ({ src, shade = 0.55, push = [1.04, 1.12], frames = 60, origin = "50% 50%" }) => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: C.ink }}>
+      <Img
+        src={staticFile(src)}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          scale: interpolate(frame, [0, frames], push, clamp),
+          transformOrigin: origin,
+        }}
+      />
+      <AbsoluteFill style={{ backgroundColor: C.ink, opacity: shade }} />
+    </AbsoluteFill>
+  );
 };
 
 // Frost Field — monogram tiled at ~7% as a surface texture (never behind wordmark/photos).
@@ -133,34 +168,6 @@ export const FrostField: React.FC<{ color: string; opacity?: number; drift?: num
             ))}
           </div>
         ))}
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-// Persistent HUD: monogram, chapter counter (orange = technical), footer lines.
-export const Hud: React.FC<{ tone: "light" | "dark"; index: string; footer?: string }> = ({
-  tone,
-  index,
-  footer = "Quiet luxury in the streets",
-}) => {
-  const fg = tone === "dark" ? C.cream : C.ink;
-  const dim = tone === "dark" ? C.gray300 : C.gray500;
-  return (
-    <AbsoluteFill style={{ padding: "110px 80px", justifyContent: "space-between", pointerEvents: "none" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Monogram width={70} color={fg} />
-        <Label color={C.orange} size={26}>
-          {index}
-        </Label>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Label color={dim} size={22}>
-          {footer}
-        </Label>
-        <Label color={dim} size={22}>
-          Cairo · Est. 2023
-        </Label>
       </div>
     </AbsoluteFill>
   );

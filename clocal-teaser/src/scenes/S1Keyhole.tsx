@@ -1,29 +1,26 @@
 import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { C, IN_OUT, OUT } from "../brand/theme";
-import { clamp, Hud, Label } from "../components/kit";
+import { clamp, Mono } from "../components/kit";
 
-// 0–2s. Ink frame, a keyhole. Through it: electric blue and a blurred glimpse.
+// 0–2s. Ink frame, a keyhole. Through it: the warehouse set from the posts, out of focus.
 // Ends by diving through the keyhole into the drop at 2s.
 export const S1Keyhole: React.FC = () => {
   const frame = useCurrentFrame();
   const open = interpolate(frame, [0, 14], [0, 1], { ...clamp, easing: OUT });
-  const dive = interpolate(frame, [44, 60], [1, 28], { ...clamp, easing: Easing2 });
+  const dive = interpolate(frame, [44, 60], [1, 28], { ...clamp, easing: IN_OUT });
   const s = open * dive;
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink }}>
-      {/* what's behind the door */}
-      <AbsoluteFill style={{ backgroundColor: C.blue }}>
+      <AbsoluteFill style={{ backgroundColor: C.ink }}>
         <Img
-          src={staticFile("photos/gawhar-flat.jpg")}
+          src={staticFile("plates/warehouse-cases.jpg")}
           style={{
-            position: "absolute",
-            width: 3200,
-            left: interpolate(frame, [0, 60], [-1250, -1050]),
-            top: -1000,
-            filter: `blur(${interpolate(frame, [0, 50], [40, 22], clamp)}px) grayscale(0.3) contrast(1.1)`,
-            mixBlendMode: "luminosity",
-            opacity: 0.55,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            scale: interpolate(frame, [0, 60], [1.35, 1.05], clamp),
+            filter: `blur(${interpolate(frame, [0, 56], [24, 0], clamp)}px)`,
           }}
         />
       </AbsoluteFill>
@@ -42,16 +39,11 @@ export const S1Keyhole: React.FC = () => {
         <rect width={1080} height={1920} fill={C.ink} mask="url(#kh)" />
       </svg>
 
-      <AbsoluteFill style={{ opacity: interpolate(frame, [40, 50], [1, 0], clamp) }}>
-        <Hud tone="dark" index="00 / 07" />
-        <AbsoluteFill style={{ alignItems: "center", top: 1260 }}>
-          <Label at={8} color={C.cream} size={30}>
-            For those who look closely
-          </Label>
-        </AbsoluteFill>
+      <AbsoluteFill style={{ alignItems: "center", top: 1260, opacity: interpolate(frame, [40, 48], [1, 0], clamp) }}>
+        <Mono at={8} color={C.cream} size={30}>
+          For those who look closely
+        </Mono>
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
-
-const Easing2 = IN_OUT;

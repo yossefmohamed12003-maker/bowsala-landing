@@ -19,4 +19,4 @@ All marks, colours and photography come from the clocal Brand Book (Vol. 01 — 
 into `public/fonts/` and set `DISPLAY_FILE` in `src/brand/theme.ts`.
 
 ## Editable props
-`dayLabel` (default "Friday") and `timeLabel` (default "7:00 PM") on the `ClocalTeaser` composition.
+`dayLabel` (default "FRI 02.10"), `timeLabel` (default "7:00 PM") and `dropLabel` (default "OCTOBER 2026") on the `ClocalTeaser` composition.

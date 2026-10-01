@@ -1,5 +1,6 @@
 import { Audio } from "@remotion/media";
 import { AbsoluteFill, Sequence, staticFile, useVideoConfig } from "remotion";
+import { Hud } from "./components/Hud";
 import { S1Keyhole } from "./scenes/S1Keyhole";
 import { S2Identity } from "./scenes/S2Identity";
 import { S3MostWanted } from "./scenes/S3MostWanted";
@@ -12,10 +13,11 @@ import { S8Finale } from "./scenes/S8Finale";
 export type TeaserProps = {
   readonly dayLabel: string;
   readonly timeLabel: string;
+  readonly dropLabel: string;
 };
 
 // 120 BPM, every scene is one bar (60 frames) and every cut lands on a beat.
-export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel }) => {
+export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel }) => {
   const { fps } = useVideoConfig();
   return (
     <AbsoluteFill style={{ backgroundColor: "#0A0A0A" }}>
@@ -43,6 +45,7 @@ export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel }) => {
       <Sequence name="Finale" from={420} durationInFrames={90} premountFor={fps}>
         <S8Finale dayLabel={dayLabel} timeLabel={timeLabel} />
       </Sequence>
+      <Hud dropLabel={dropLabel} />
       <Audio name="Music" src={staticFile("audio/teaser.wav")} premountFor={fps} />
     </AbsoluteFill>
   );
