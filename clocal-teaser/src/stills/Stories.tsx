@@ -88,7 +88,7 @@ export const DropStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
 );
 
 // ─────────────────────── COUNTDOWN STORY ───────────────────────
-// About the drop in general, with a slot sized to IG's countdown sticker (~820×360, rounded).
+// Countdown slot measured from the IG countdown sticker at default scale: 640×365, radius 28.
 export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>
     {/* the warehouse set from the live posts */}
@@ -110,7 +110,7 @@ export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => 
       <div style={headline(118, C.cream)}>The drop</div>
     </div>
 
-    <CountdownSlot color={C.cream} top={920} />
+    <CountdownSlot color={C.cream} top={910} />
   </AbsoluteFill>
 );
 
@@ -119,9 +119,9 @@ const CountdownSlot: React.FC<{ color: string; top: number }> = ({ color, top })
   <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center" }}>
     <div
       style={{
-        width: 820,
-        height: 330,
-        borderRadius: 36,
+        width: 640,
+        height: 365,
+        borderRadius: 28,
         border: `1.5px dashed ${color}`,
         display: "flex",
         alignItems: "center",
