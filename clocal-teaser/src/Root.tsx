@@ -1,5 +1,6 @@
-import { Composition } from "remotion";
+import { Composition, Folder, Still } from "remotion";
 import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
+import { DropStory, EarlyAccessStory } from "./stills/Stories";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -42,6 +43,22 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={{ keyTime: "4:00 PM", drop: "5:00 PM", day: "FRI 02.10" }}
       />
+      <Folder name="Stories">
+        <Still
+          id="StoryDrop"
+          component={DropStory}
+          width={1080}
+          height={1920}
+          defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+        <Still
+          id="StoryEarlyAccess"
+          component={EarlyAccessStory}
+          width={1080}
+          height={1920}
+          defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+      </Folder>
     </>
   );
 };
