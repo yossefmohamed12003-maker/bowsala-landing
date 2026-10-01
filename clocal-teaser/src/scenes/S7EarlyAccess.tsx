@@ -15,7 +15,7 @@ const Typed: React.FC<{ at: number; text: string; color: string; cps?: number }>
   );
 };
 
-// 12–14s. EARLY ACCESS 4:00 PM · password to your inbox · then the build strobe.
+// 14–16s. EARLY ACCESS 4:00 PM · password to your inbox · then the build strobe.
 export const S7EarlyAccess: React.FC = () => {
   const frame = useCurrentFrame();
   const strobe = frame >= 45;
@@ -36,7 +36,7 @@ export const S7EarlyAccess: React.FC = () => {
             4:00 PM
           </Slam>
           <div style={{ height: 60 }} />
-          <Typed at={26} text="PASSWORD → YOUR INBOX" color={C.ink} />
+          <Typed at={26} text="DECRYPTION KEY → YOUR INBOX" color={C.ink} />
           <div style={{ height: 18 }} />
           <Mono at={34} color={C.gray500} size={24}>
             SIGN UP ON THECLOCAL.COM

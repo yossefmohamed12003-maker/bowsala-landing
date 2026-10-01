@@ -7,6 +7,7 @@ import { S3MostWanted } from "./scenes/S3MostWanted";
 import { S4Products } from "./scenes/S4Products";
 import { S5Surprises } from "./scenes/S5Surprises";
 import { S6Sale } from "./scenes/S6Sale";
+import { S7Access } from "./scenes/S7Access";
 import { S7EarlyAccess } from "./scenes/S7EarlyAccess";
 import { S8Finale } from "./scenes/S8Finale";
 
@@ -39,10 +40,13 @@ export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel }
       <Sequence name="EOS sale" from={300} durationInFrames={60} premountFor={fps}>
         <S6Sale />
       </Sequence>
-      <Sequence name="Early access" from={360} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Access restricted" from={360} durationInFrames={60} premountFor={fps}>
+        <S7Access />
+      </Sequence>
+      <Sequence name="Early access" from={420} durationInFrames={60} premountFor={fps}>
         <S7EarlyAccess />
       </Sequence>
-      <Sequence name="Finale" from={420} durationInFrames={90} premountFor={fps}>
+      <Sequence name="Finale" from={480} durationInFrames={90} premountFor={fps}>
         <S8Finale dayLabel={dayLabel} timeLabel={timeLabel} />
       </Sequence>
       <Hud dropLabel={dropLabel} />

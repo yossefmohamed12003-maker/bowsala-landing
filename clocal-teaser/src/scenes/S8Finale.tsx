@@ -4,7 +4,7 @@ import { clamp, Mono, Punch, Slam, Wordmark } from "../components/kit";
 
 type Props = { dayLabel: string; timeLabel: string };
 
-// 14–17s. "FRI 02.10 / 7:00 PM" hits, then the wordmark — cream on blue — and the URL.
+// 16–19s. "FRI 02.10 / 7:00 PM" hits, then the wordmark — cream on blue — and the URL.
 export const S8Finale: React.FC<Props> = ({ dayLabel, timeLabel }) => {
   const frame = useCurrentFrame();
   const logo = frame >= 30;

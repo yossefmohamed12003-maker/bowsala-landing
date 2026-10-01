@@ -21,6 +21,9 @@ export const S6Sale: React.FC = () => {
             <Slam at={15} size={150} color={C.cream}>
               sale.
             </Slam>
+            <Mono at={18} color={C.cream} size={26} style={{ marginTop: 40 }}>
+              [ FREE SHIPPING OVER EGP 2,000 ]
+            </Mono>
           </AbsoluteFill>
         ) : (
           <AbsoluteFill style={{ justifyContent: "center", padding: "0 92px" }}>

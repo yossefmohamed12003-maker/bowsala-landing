@@ -1,10 +1,10 @@
-// Synthesises the teaser soundtrack: 120 BPM, 17s, beat-locked to the video cuts.
+// Synthesises the teaser soundtrack: 120 BPM, 19s, beat-locked to the video cuts.
 // 1 beat = 0.5s = 15 frames @ 30fps. 1 bar = 2s.
 // Run: node scripts/make-music.mjs  -> public/audio/teaser.wav
 import { writeFileSync, mkdirSync } from "node:fs";
 
 const SR = 44100;
-const DUR = 17;
+const DUR = 19;
 const N = SR * DUR;
 const L = new Float32Array(N);
 const R = new Float32Array(N);
@@ -164,10 +164,10 @@ for (let i = 0; i < 7; i++) add(b(i * 0.5), tick(), i % 2 ? 0.6 : 1, i % 2 ? 0.3
 add(0, riser(1.9, 0.05), 0.9);
 add(0, subDrop(1.6), 0.5);
 
-// MAIN GROOVE 2s - 14s (bars 1..6), drill-ish
-const roots = [E1, E1, C1, D1, E1, G1];
-const chords = [Em, Em, Cmaj, Dmaj, Em, Bm];
-for (let bar = 0; bar < 6; bar++) {
+// MAIN GROOVE 2s - 16s (bars 1..7), drill-ish
+const roots = [E1, E1, C1, D1, E1, C1, G1];
+const chords = [Em, Em, Cmaj, Dmaj, Em, Cmaj, Bm];
+for (let bar = 0; bar < 7; bar++) {
   const t0 = 2 + bar * 2;
   const root = roots[bar];
   // kicks / 808
@@ -195,26 +195,31 @@ for (let bar = 0; bar < 6; bar++) {
 // drop impact at 2s
 add(2, impact(2.2), 0.85);
 // transition whooshes into each scene change
-[3.75, 5.75, 7.75, 9.75, 11.75].forEach((t) => add(t, whoosh(0.28), 0.55));
+[3.75, 5.75, 7.75, 9.75, 11.75, 13.75].forEach((t) => add(t, whoosh(0.28), 0.55));
 // half-bar riser + impact into "surprises" at 8s
 add(7, riser(1, 0.1), 0.45);
 add(8, impact(1.4), 0.5);
 
-// BUILD 12-14s: snare roll accelerating + big riser
-for (let i = 0; i < 16; i++) {
-  const t = 12 + i * 0.125;
-  if (t < 13.5) add(t, clap(), 0.25 + i * 0.03, i % 2 ? 0.2 : -0.2);
-}
-for (let i = 0; i < 8; i++) add(13.5 + i * 0.0625, clap(), 0.55 + i * 0.05);
-add(12, riser(2, 0.1), 0.75);
+// ACCESS TERMINAL 12-14s: keystrokes while the email types, a clunk on REQUEST CLEARANCE
+for (let i = 0; i < 12; i++) add(12.4 + i * 0.045, tick(), 0.35 + (i % 3) * 0.1, i % 2 ? 0.25 : -0.25);
+add(13, kick(0.25, 1.6), 0.5);
+add(13, stab([659.3, 987.8], 0.3, 0.5), 0.3);
 
-// FINAL HIT 14s: impact + long 808, then tail on the logo
-add(14, impact(3), 1);
-add(14, kick(0.6, 1.4), 1);
-add(14, b808(E1, 2.6, E1 * 2), 1);
-add(14, stab(Em, 1.6, 0.35), 0.4);
-add(15, tick(), 0.8, 0.3);
-add(15.5, tick(), 0.6, -0.3);
+// BUILD 14-16s: snare roll accelerating + big riser
+for (let i = 0; i < 16; i++) {
+  const t = 14 + i * 0.125;
+  if (t < 15.5) add(t, clap(), 0.25 + i * 0.03, i % 2 ? 0.2 : -0.2);
+}
+for (let i = 0; i < 8; i++) add(15.5 + i * 0.0625, clap(), 0.55 + i * 0.05);
+add(14, riser(2, 0.1), 0.75);
+
+// FINAL HIT 16s: impact + long 808, then tail on the logo
+add(16, impact(3), 1);
+add(16, kick(0.6, 1.4), 1);
+add(16, b808(E1, 2.6, E1 * 2), 1);
+add(16, stab(Em, 1.6, 0.35), 0.4);
+add(17, tick(), 0.8, 0.3);
+add(17.5, tick(), 0.6, -0.3);
 
 // ---------- master: simple reverb, glue, limiter ----------
 const combs = [1557, 1617, 1491, 1422].map((d) => ({ d, buf: new Float32Array(d), i: 0 }));

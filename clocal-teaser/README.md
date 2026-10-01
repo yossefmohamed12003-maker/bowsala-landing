@@ -1,6 +1,6 @@
 # clocal — Drop Teaser (Reel 9:16)
 
-Remotion project for the clocal new-branding + drop teaser. 1080×1920, 30fps, 17s, 120 BPM — every cut lands on a beat.
+Remotion project for the clocal new-branding + drop teaser. 1080×1920, 30fps, 19s, 120 BPM — every cut lands on a beat.
 
 ```
 npm i
