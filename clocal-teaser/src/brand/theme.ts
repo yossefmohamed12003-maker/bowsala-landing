@@ -16,16 +16,16 @@ export const C = {
 } as const;
 
 // Headlines follow the live teaser posts: heavy, extended, uppercase ("THE NEW clocal").
-// Archivo (wdth 125, wght 900) matches that cut. Brand-book Satoshi is kept for sentence-case
-// fallback — drop Satoshi-Variable.woff2 into public/fonts and point DISPLAY_FILE at it.
-const DISPLAY_FILE = "fonts/DMSans-Variable.woff2";
+// Archivo (wdth 125, wght 900) matches that cut. Satoshi (brand display face) sets the
+// site-style UI (access card, receipts headers); Geist + Inter per the brand book.
+const DISPLAY_FILE = "fonts/Satoshi-Variable.woff2";
 
 const variable = (family: string, file: string, stretch?: string) =>
-  loadFont({ family, url: staticFile(file), weight: "100 1000", display: "block", ...(stretch ? { stretch } : {}) });
+  loadFont({ family, url: staticFile(file), weight: "100 900", display: "block", ...(stretch ? { stretch } : {}) });
 
 variable("ClocalHeadline", "fonts/Archivo-Variable.woff2", "62% 125%");
 variable("ClocalDisplay", DISPLAY_FILE);
-variable("Inter", "fonts/Inter-Variable.woff2");
+variable("Inter", "fonts/Inter-Variable.ttf");
 variable("Geist", "fonts/Geist-Variable.woff2");
 variable("Geist Mono", "fonts/GeistMono-Variable.woff2");
 
