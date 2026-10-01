@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { C, F } from "../brand/theme";
-import { headline, Monogram } from "../components/kit";
+import { headline } from "../components/kit";
 
 // Instagram story stills (1080×1920). Key content stays inside the IG safe zone
 // (≈250px clear at top, ≈250px at bottom). Marked slots are where the IG link /
@@ -83,121 +83,163 @@ const Hand: React.FC<{ color: string; size?: number; rot?: number }> = ({ color,
 );
 
 // ───────────────────────── DROP STORY ─────────────────────────
+// Echoes the teaser's beats: most wanted are back → + big surprises → EOS sale / limited stock.
+const Print: React.FC<{ src?: string; x: number; y: number; w: number; h: number; rot: number; label: string; redacted?: boolean }> = ({
+  src,
+  x,
+  y,
+  w,
+  h,
+  rot,
+  label,
+  redacted,
+}) => (
+  <div style={{ position: "absolute", left: x, top: y, width: w, rotate: `${rot}deg` }}>
+    <div style={{ backgroundColor: C.creamTint, padding: 10, boxShadow: "0 22px 40px rgba(0,0,0,0.55)", position: "relative" }}>
+      <div style={{ width: w - 20, height: h, overflow: "hidden", position: "relative", backgroundColor: C.ink }}>
+        {src ? (
+          <Img
+            src={staticFile(src)}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "50% 22%",
+              filter: redacted ? "blur(14px) grayscale(1) brightness(0.6)" : "contrast(1.08)",
+            }}
+          />
+        ) : null}
+        {redacted ? (
+          <>
+            <div style={{ position: "absolute", left: 0, right: 0, top: "34%", height: "30%", backgroundColor: C.ink }} />
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                translate: "-50% -50%",
+                rotate: "-14deg",
+                border: `5px solid ${C.orange}`,
+                padding: "6px 14px",
+                ...headline(34, C.orange),
+                backgroundColor: "rgba(10,10,10,0.6)",
+              }}
+            >
+              CLASSIFIED
+            </div>
+          </>
+        ) : null}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 2px 2px" }}>
+        <span style={mono(18, C.ink, { fontWeight: 600 })}>{label}</span>
+        <span style={mono(18, C.orange)}>CL/04</span>
+      </div>
+    </div>
+  </div>
+);
+
 export const DropStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>
-    {/* hero: Gawhar, graded down into ink */}
     <Img
-      src={staticFile("photos/gawhar-model.jpg")}
-      style={{
-        position: "absolute",
-        left: -40,
-        top: -40,
-        width: 1160,
-        height: 1520,
-        objectFit: "cover",
-        objectPosition: "50% 16%",
-        filter: "contrast(1.12) brightness(0.86) saturate(0.85)",
-      }}
+      src={staticFile("plates/warehouse-cases.jpg")}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.2, filter: "grayscale(0.3) blur(2px)" }}
     />
-    <AbsoluteFill style={{ backgroundColor: "#141a2e", mixBlendMode: "soft-light", opacity: 0.5 }} />
-    <AbsoluteFill
-      style={{
-        background: `linear-gradient(180deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.35) 14%, rgba(10,10,10,0) 24%, rgba(10,10,10,0) 38%, rgba(10,10,10,0.85) 54%, ${C.ink} 64%)`,
-      }}
-    />
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%)" }} />
-
-    {/* oversized outline name */}
-    <div
-      style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 900,
-        textAlign: "center",
-        ...headline(176, "transparent"),
-        WebkitTextStroke: `2px ${C.cream}`,
-        opacity: 0.9,
-        letterSpacing: "-0.03em",
-      }}
-    >
-      GAWHAR
-    </div>
-
+    <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.2) 30%, ${C.ink} 75%)` }} />
     <Corners color={C.cream} />
-    <div style={{ position: "absolute", left: 92, top: 250, ...mono(26, C.cream) }}>{"FILE 02 / CL/04\nNO. 01 — GAWHAR"}</div>
+
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(26, C.cream) }}>{"FILE 02 / CL/04\nTHE DROP"}</div>
     <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
-      <div style={{ ...mono(26, C.cream), textAlign: "right" }}>{"OCTOBER 2026\nMOST WANTED / BACK"}</div>
+      <div style={{ ...mono(26, C.cream), textAlign: "right" }}>{"OCTOBER 2026\nSTATUS / UNLOCKING"}</div>
       <div style={{ width: 22, height: 22, backgroundColor: C.blue }} />
     </div>
 
-    {/* the ticket */}
+    {/* the most wanted are back */}
+    <div style={{ position: "absolute", left: 92, right: 92, top: 372 }}>
+      <div style={headline(66, C.cream)}>The most wanted</div>
+      <div style={headline(66, C.blue)}>are back.</div>
+    </div>
+
+    {/* prints: Gawhar, Wound, + new (classified) */}
+    <Print src="photos/gawhar-model.jpg" x={52} y={548} w={318} h={380} rot={-4} label="NO.01 GAWHAR" />
+    <Print src="photos/wound-model.jpg" x={381} y={530} w={318} h={380} rot={1.5} label="NO.02 WOUND" />
+    <Print src="photos/look-black.jpg" x={710} y={556} w={318} h={380} rot={4.5} label="NO.03 ██████" redacted />
     <div
       style={{
         position: "absolute",
-        left: 64,
-        right: 64,
-        top: 1090,
-        height: 330,
+        right: 70,
+        top: 990,
         display: "flex",
-        rotate: "-1.2deg",
-        filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.55))",
+        alignItems: "baseline",
+        gap: 10,
+        rotate: "4deg",
       }}
     >
-      <div style={{ flex: 1, backgroundColor: C.cream, padding: "30px 34px", position: "relative" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={mono(24, C.orange)}>[ THE DROP — CL/04 ]</span>
-          <span style={mono(22, C.gray500)}>NO. 01</span>
-        </div>
-        <div style={{ ...headline(76, C.ink), marginTop: 16 }}>{day}</div>
-        <div style={{ ...headline(96, C.blue), marginTop: 2 }}>{drop}</div>
-        <div style={{ display: "flex", gap: 30, marginTop: 18 }}>
-          <span style={mono(22, C.ink)}>{`EARLY ACCESS ${keyTime}`}</span>
-          <span style={mono(22, C.orange, { fontWeight: 700 })}>KEY → CHECK SPAM</span>
-        </div>
+      <span style={headline(44, C.blue)}>+</span>
+      <span style={headline(40, C.cream)}>Big surprises.</span>
+    </div>
+
+    {/* end of season sale band */}
+    <div
+      style={{
+        position: "absolute",
+        left: -40,
+        right: -40,
+        top: 1080,
+        height: 236,
+        backgroundColor: C.blue,
+        rotate: "-2.5deg",
+        padding: "26px 132px",
+        boxShadow: "0 24px 50px rgba(0,0,0,0.5)",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={mono(24, C.cream)}>[ END OF SEASON SALE ]</span>
+        <span style={mono(24, C.cream)}>FREE SHIPPING &gt; EGP 2,000</span>
       </div>
-      <div style={{ width: 0, borderLeft: `3px dashed ${C.ink}`, backgroundColor: C.cream }} />
-      <div
-        style={{
-          width: 150,
-          backgroundColor: C.blue,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "26px 0",
-        }}
-      >
-        <Monogram width={64} color={C.cream} />
-        <span style={{ ...mono(20, C.cream), writingMode: "vertical-rl", rotate: "180deg" }}>ADMIT ONE</span>
+      <div style={{ ...headline(76, C.cream), marginTop: 10 }}>Limited stock.</div>
+      <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 14 }}>
+        <span style={mono(20, C.cream)}>STOCK REMAINING</span>
+        <div style={{ flex: 1, height: 8, backgroundColor: "rgba(246,238,227,0.3)" }}>
+          <div style={{ width: "7%", height: "100%", backgroundColor: C.orange }} />
+        </div>
+        <span style={mono(22, C.orange, { fontWeight: 700 })}>007%</span>
       </div>
     </div>
 
-    {/* site + link slot */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1452, display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ ...headline(54, C.cream) }}>THECLOCAL.COM</div>
-      <div style={{ ...caps(24, C.cream), marginTop: 18, display: "flex", alignItems: "center", gap: 14 }}>
+    {/* the drop */}
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1350 }}>
+      <div style={mono(26, C.orange)}>[ THE DROP ]</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 8 }}>
+        <span style={headline(62, C.cream)}>{day}</span>
+        <span style={{ ...headline(62, C.cream), borderBottom: `6px solid ${C.blue}` }}>{drop}</span>
+      </div>
+      <div style={{ ...mono(20, C.gray300), marginTop: 10 }}>{`EARLY ACCESS ${keyTime} · KEY LANDS IN YOUR SPAM`}</div>
+    </div>
+
+    {/* link slot */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1520, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ ...caps(22, C.cream), display: "flex", alignItems: "center", gap: 14 }}>
         <span style={{ color: C.blue }}>↓</span>
-        <span>Tap here to unlock</span>
+        <span>Tap · theclocal.com</span>
         <span style={{ color: C.blue }}>↓</span>
       </div>
-      <div style={{ position: "relative", marginTop: 14 }}>
+      <div style={{ position: "relative", marginTop: 12 }}>
         <div
           style={{
-            width: 720,
-            height: 120,
-            borderRadius: 60,
+            width: 700,
+            height: 104,
+            borderRadius: 52,
             border: `3px solid ${C.blue}`,
-            boxShadow: `0 0 0 10px rgba(43,0,255,0.18), 0 0 60px rgba(43,0,255,0.55)`,
+            boxShadow: "0 0 0 9px rgba(43,0,255,0.18), 0 0 56px rgba(43,0,255,0.55)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <span style={{ ...mono(22, C.cream), opacity: 0.45 }}>[ LINK STICKER ]</span>
+          <span style={{ ...mono(20, C.cream), opacity: 0.45 }}>[ LINK STICKER ]</span>
         </div>
-        <div style={{ position: "absolute", right: -70, top: 50 }}>
-          <Hand color={C.cream} size={104} rot={-28} />
+        <div style={{ position: "absolute", right: -66, top: 40 }}>
+          <Hand color={C.cream} size={96} rot={-28} />
         </div>
       </div>
     </div>
