@@ -23,17 +23,6 @@ const mono = (size: number, color: string, extra?: React.CSSProperties): React.C
   lineHeight: 1.4,
   ...extra,
 });
-const caps = (size: number, color: string, extra?: React.CSSProperties): React.CSSProperties => ({
-  fontFamily: F.tech,
-  fontWeight: 600,
-  fontSize: size,
-  letterSpacing: "0.16em",
-  textTransform: "uppercase",
-  color,
-  whiteSpace: "nowrap",
-  ...extra,
-});
-
 const Corners: React.FC<{ color: string; inset?: number; len?: number }> = ({ color, inset = 56, len = 150 }) => {
   const c = (pos: React.CSSProperties) => <div style={{ position: "absolute", width: len, height: len * 0.62, ...pos }} />;
   const b = `2px solid ${color}`;
@@ -103,55 +92,40 @@ export const DropStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
 export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
   <AbsoluteFill style={{ backgroundColor: C.cream }}>
     <Corners color={`${C.ink}99`} len={120} />
-    <div
-      style={{
-        position: "absolute",
-        left: 92,
-        right: 92,
-        top: 250,
-        paddingBottom: 20,
-        borderBottom: `1px solid ${C.ink}40`,
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: C.blue }} />
-        <span style={caps(20, C.ink, { fontWeight: 500 })}>[ File 02 / CL/04 ]</span>
-      </div>
-      <span style={caps(20, C.gray500, { fontWeight: 500 })}>October 2026</span>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
+      <span style={mono(22, C.ink)}>FILE 02 / CL/04</span>
+      <span style={mono(22, C.ink)}>NO.01 GAWHAR</span>
     </div>
 
-    {/* product hero: the Gawhar flat, white knocked into the cream ground */}
+    {/* oversized type sitting behind the garment */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center" }}>
+      <div style={{ ...headline(250, C.ink), lineHeight: 0.86 }}>THE</div>
+      <div style={{ ...headline(250, C.ink), lineHeight: 0.86 }}>DROP</div>
+    </div>
     <Img
-      src={staticFile("photos/gawhar-flat-tight.jpg")}
+      src={staticFile("photos/gawhar-flat-cutout.png")}
       style={{
         position: "absolute",
-        left: 40,
-        top: 318,
-        width: 1000,
-        height: 670,
+        left: 90,
+        top: 520,
+        width: 900,
+        height: 580,
         objectFit: "contain",
-        mixBlendMode: "multiply",
+        filter: "drop-shadow(0 30px 40px rgba(10,10,10,0.25))",
       }}
     />
-    <div style={{ position: "absolute", left: 92, top: 1000, ...mono(20, C.ink) }}>{"NO.01 GAWHAR\nTHE MOST WANTED"}</div>
-    <div style={{ position: "absolute", right: 92, top: 1000, ...mono(20, C.ink), textAlign: "right" }}>{"BACK + NEW PIECES\nEOS SALE"}</div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1086, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-      <div style={{ fontFamily: F.display, fontWeight: 900, fontSize: 84, letterSpacing: "-0.035em", lineHeight: 1, color: C.ink, textTransform: "uppercase" }}>
-        [ The drop ]<span style={{ color: C.blue }}>_</span>
-      </div>
-      <div style={{ ...mono(24, C.ink), textAlign: "right" }}>{`${day}\n${drop}`}</div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1110, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+      <span style={headline(62, C.ink)}>{day}</span>
+      <span style={headline(62, C.blue)}>{drop}</span>
     </div>
 
-    {/* countdown sticker slot — IG countdown at default scale (~820×360) */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1210, display: "flex", justifyContent: "center" }}>
+    {/* countdown sticker slot — IG countdown at default scale (~820×340) */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1215, display: "flex", justifyContent: "center" }}>
       <div
         style={{
           width: 820,
-          height: 340,
+          height: 330,
           borderRadius: 36,
           border: `1.5px dashed ${C.ink}`,
           display: "flex",
@@ -163,9 +137,15 @@ export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => 
       </div>
     </div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1584, display: "flex", justifyContent: "space-between" }}>
-      <span style={mono(22, C.blue)}>{`EARLY ACCESS ${keyTime} · CHECK SPAM`}</span>
-      <span style={mono(22, C.ink)}>THECLOCAL.COM</span>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1576 }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={mono(21, C.ink)}>GAWHAR & WOUND — BACK</span>
+        <span style={mono(21, C.ink)}>+ NEW · EOS SALE</span>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+        <span style={mono(21, C.blue)}>{`EARLY ACCESS ${keyTime} · CHECK SPAM`}</span>
+        <span style={mono(21, C.gray500)}>THECLOCAL.COM</span>
+      </div>
     </div>
   </AbsoluteFill>
 );
