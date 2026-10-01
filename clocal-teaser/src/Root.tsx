@@ -1,5 +1,5 @@
 import { Composition } from "remotion";
-import { SignupHowTo } from "./howto/SignupHowTo";
+import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -36,11 +36,11 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="SignupHowTo"
         component={SignupHowTo}
-        durationInFrames={1050}
+        durationInFrames={HOWTO_DURATION}
         fps={30}
         width={1080}
         height={1920}
-        defaultProps={{ keyTime: "3:00 PM", earlyAccess: "4:00 PM", drop: "7:00 PM", day: "FRI 02.10" }}
+        defaultProps={{ keyTime: "4:00 PM", drop: "5:00 PM", day: "FRI 02.10" }}
       />
     </>
   );
