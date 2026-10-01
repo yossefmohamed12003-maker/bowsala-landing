@@ -9,11 +9,12 @@ const TONES: [number, "dark" | "light" | "none"][] = [
   [0, "dark"],
   [60, "light"],
   [120, "dark"],
-  [180, "light"],
-  [240, "dark"],
-  [480, "light"],
-  [525, "none"],
-  [540, "dark"],
+  [180, "dark"],
+  [240, "light"],
+  [300, "dark"],
+  [540, "light"],
+  [585, "none"],
+  [600, "dark"],
 ];
 
 const Corner: React.FC<{ pos: "tl" | "tr" | "bl" | "br"; color: string; len: number }> = ({ pos, color, len }) => {
@@ -42,10 +43,10 @@ export const Hud: React.FC<{ dropLabel: string }> = ({ dropLabel }) => {
   if (tone === "none") return null;
   const fg = tone === "dark" ? C.cream : C.ink;
   const len = interpolate(frame, [0, 12], [0, 190], { ...clamp, easing: (t) => 1 - (1 - t) ** 3 });
-  const pct = Math.round(interpolate(frame, [60, 525], [0, 99], clamp));
+  const pct = Math.round(interpolate(frame, [60, 585], [0, 99], clamp));
   const status =
-    frame < 52 ? "STATUS / LOCKED" : frame < 540 ? `UNLOCKING / ${String(pct).padStart(3, "0")}%` : "STATUS / UNLOCKED";
-  const blink = frame < 540 ? Math.floor(frame / 8) % 2 === 0 : true;
+    frame < 52 ? "STATUS / LOCKED" : frame < 600 ? `UNLOCKING / ${String(pct).padStart(3, "0")}%` : "STATUS / UNLOCKED";
+  const blink = frame < 600 ? Math.floor(frame / 8) % 2 === 0 : true;
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>

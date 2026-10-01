@@ -1,11 +1,11 @@
 // Synthesises the teaser soundtrack — dark, minimal, half-time "premium street".
-// 120 BPM grid (felt as 60 half-time), 21s, every scene change on a beat.
+// 120 BPM grid (felt as 60 half-time), 23s, every scene change on a beat.
 // 1 beat = 0.5s = 15 frames @ 30fps. 1 bar = 2s.
 // Run: node scripts/make-music.mjs  -> public/audio/teaser.wav
 import { writeFileSync, mkdirSync } from "node:fs";
 
 const SR = 44100;
-const DUR = 21;
+const DUR = 23;
 const N = SR * DUR;
 const BEAT = 0.5;
 
@@ -174,10 +174,11 @@ const bars = [
   { t: 2, root: E1, chord: Em9 },
   { t: 4, root: C1, chord: Cmaj7 },
   { t: 6, root: E1, chord: Em9 },
-  { t: 8, root: C1, chord: Cmaj7 },
-  { t: 10, root: A1, chord: Em9 },
-  { t: 12, root: D1, chord: Cmaj7 },
-  { t: 16, root: E1, chord: Em9 },
+  { t: 8, root: E1, chord: Em9 },
+  { t: 10, root: C1, chord: Cmaj7 },
+  { t: 12, root: A1, chord: Em9 },
+  { t: 14, root: D1, chord: Cmaj7 },
+  { t: 18, root: E1, chord: Em9 },
 ];
 bars.forEach(({ t, root, chord }, bi) => {
   K(t, 1);
@@ -209,29 +210,29 @@ bars.forEach(({ t, root, chord }, bi) => {
 
 // drop at 2s: deep sub drop, no cymbal crash
 add(DRY, 2, subDrop(2), 0.8);
-// "surprises" at 10s lands after a beat of silence (see gate) on a sub hit
-add(DRY, 10, subDrop(1.6), 0.6);
+// "surprises" at 12s lands after a beat of silence (see gate) on a sub hit
+add(DRY, 12, subDrop(1.6), 0.6);
 
-// ACCESS TERMINAL 14–16: breakdown — pad, keystrokes, one clunk on the button
-add(PAD, 14, pad(Em9, 2.05), 1.0);
-for (let i = 0; i < 12; i++) add(DRY, 14.4 + i * 0.045, tick(), 0.3 + (i % 3) * 0.08, i % 2 ? 0.25 : -0.25);
-K(15, 0.7);
-add(DRY, 15, rim(), 0.8);
-add(DELAY, 15, bell(987.8), 0.5);
-add(DRY, 15.5, hat(), 0.5);
-add(DRY, 15.75, hat(), 0.6);
+// ACCESS TERMINAL 16–18: breakdown — pad, keystrokes, one clunk on the button
+add(PAD, 16, pad(Em9, 2.05), 1.0);
+for (let i = 0; i < 12; i++) add(DRY, 16.4 + i * 0.045, tick(), 0.3 + (i % 3) * 0.08, i % 2 ? 0.25 : -0.25);
+K(17, 0.7);
+add(DRY, 17, rim(), 0.8);
+add(DELAY, 17, bell(987.8), 0.5);
+add(DRY, 17.5, hat(), 0.5);
+add(DRY, 17.75, hat(), 0.6);
 
-// 16–18 last groove bar with a soft swell into the final hit
-add(DRY, 16.4, swell(1.6, 196), 0.6);
+// 18–20 last groove bar with a soft swell into the final hit
+add(DRY, 18.4, swell(1.6, 196), 0.6);
 
-// FINAL 18–21: one long 808, one bell, the pad tail, ticks
-K(18, 1.1);
-add(DRY, 18, b808(E1, 3, E1 * 2), 1);
-add(DRY, 18, bell(329.6, 2.4), 0.7);
-add(DELAY, 18, bell(329.6, 2.4), 0.6);
-add(PAD, 18, pad(Em9, 3), 0.9);
-add(DRY, 19, tick(), 0.6, 0.3);
-add(DRY, 19.5, tick(), 0.45, -0.3);
+// FINAL 20–23: one long 808, one bell, the pad tail, ticks
+K(20, 1.1);
+add(DRY, 20, b808(E1, 3, E1 * 2), 1);
+add(DRY, 20, bell(329.6, 2.4), 0.7);
+add(DELAY, 20, bell(329.6, 2.4), 0.6);
+add(PAD, 20, pad(Em9, 3), 0.9);
+add(DRY, 21, tick(), 0.6, 0.3);
+add(DRY, 21.5, tick(), 0.45, -0.3);
 
 // ---------- FX ----------
 // reverb (Schroeder): 4 combs + 2 allpasses
@@ -285,8 +286,8 @@ for (const t of kickTimes) {
   }
 }
 
-// silence just before the drop (1.85–2.0) and before "surprises" (9.75–10.0)
-const gate = (t) => ((t >= 1.85 && t < 2.0) || (t >= 9.75 && t < 10.0) ? 0 : 1);
+// silence just before the drop (1.85–2.0) and before "surprises" (11.75–12.0)
+const gate = (t) => ((t >= 1.85 && t < 2.0) || (t >= 11.75 && t < 12.0) ? 0 : 1);
 
 // ---------- master ----------
 const mixed = new Float32Array(N * 2);
