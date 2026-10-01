@@ -47,13 +47,6 @@ const Corners: React.FC<{ color: string; inset?: number; len?: number }> = ({ co
   );
 };
 
-const Cross: React.FC<{ x: number; y: number; color: string }> = ({ x, y, color }) => (
-  <div style={{ position: "absolute", left: x - 12, top: y - 12, width: 24, height: 24 }}>
-    <div style={{ position: "absolute", left: 11, top: 0, width: 2, height: 24, backgroundColor: color }} />
-    <div style={{ position: "absolute", left: 0, top: 11, width: 24, height: 2, backgroundColor: color }} />
-  </div>
-);
-
 // ───────────────────────── DROP STORY ─────────────────────────
 // Quiet version: two straight prints, one headline, a dossier list, the date as the hero.
 const ListRow: React.FC<{ l: string; r: string; color: string; rColor?: string }> = ({ l, r, color, rColor }) => (
@@ -100,25 +93,29 @@ export const DropStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
       <span style={headline(58, C.blue)}>{drop}</span>
     </div>
 
-    {/* link sticker slot */}
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1556 }}>
+    {/* link sticker slot — sized to IG's link sticker at default scale (~500×104) */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1556, display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
       <div
         style={{
+          width: 500,
           height: 104,
-          border: `1.5px solid ${C.cream}`,
+          borderRadius: 24,
+          border: `1.5px dashed ${C.cream}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <span style={mono(24, C.cream)}>[ TAP — THECLOCAL.COM ]</span>
+        <span style={{ ...mono(20, C.cream), opacity: 0.5 }}>[ LINK ]</span>
       </div>
+      <span style={mono(20, C.gray300)}>TAP — THECLOCAL.COM</span>
     </div>
   </AbsoluteFill>
 );
 
-// ─────────────────────── EARLY ACCESS STORY ───────────────────────
-export const EarlyAccessStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
+// ─────────────────────── COUNTDOWN STORY ───────────────────────
+// About the drop in general, with a slot sized to IG's countdown sticker (~820×360, rounded).
+export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
   <AbsoluteFill style={{ backgroundColor: C.cream }}>
     <Corners color={`${C.ink}99`} len={120} />
     <div
@@ -136,18 +133,18 @@ export const EarlyAccessStory: React.FC<StoryProps> = ({ day, keyTime, drop }) =
     >
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <div style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: C.blue }} />
-        <span style={caps(20, C.ink, { fontWeight: 500 })}>[ Secure connection established ]</span>
+        <span style={caps(20, C.ink, { fontWeight: 500 })}>[ File 02 / CL/04 ]</span>
       </div>
-      <span style={caps(20, C.gray500, { fontWeight: 500 })}>CL/04</span>
+      <span style={caps(20, C.gray500, { fontWeight: 500 })}>October 2026</span>
     </div>
 
     <div style={{ position: "absolute", left: 92, right: 92, top: 350 }}>
-      <div style={caps(24, C.ink, { fontWeight: 500 })}>&gt; System unlocks at {keyTime}</div>
+      <div style={caps(24, C.ink, { fontWeight: 500 })}>&gt; {day} — {drop}</div>
       <div
         style={{
           fontFamily: F.display,
           fontWeight: 900,
-          fontSize: 116,
+          fontSize: 132,
           letterSpacing: "-0.035em",
           lineHeight: 0.95,
           color: C.ink,
@@ -155,31 +152,35 @@ export const EarlyAccessStory: React.FC<StoryProps> = ({ day, keyTime, drop }) =
           marginTop: 24,
         }}
       >
-        [ Early
+        [ The
         <br />
-        access ]<span style={{ color: C.blue }}>_</span>
+        drop ]<span style={{ color: C.blue }}>_</span>
       </div>
     </div>
 
     {/* countdown sticker slot */}
-    <div style={{ position: "absolute", left: 92, right: 92, top: 730 }}>
-      <div style={{ ...mono(22, C.gray500), marginBottom: 14 }}>SET YOUR REMINDER</div>
-      <div style={{ position: "relative", height: 360, border: `1.5px solid ${C.ink}` }}>
-        <Cross x={0} y={0} color={C.ink} />
-        <Cross x={896} y={0} color={C.ink} />
-        <Cross x={0} y={360} color={C.ink} />
-        <Cross x={896} y={360} color={C.ink} />
-        <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-          <span style={{ ...mono(22, C.ink), opacity: 0.35 }}>[ COUNTDOWN ]</span>
-        </AbsoluteFill>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 760, display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+      <span style={mono(22, C.gray500)}>SET YOUR REMINDER</span>
+      <div
+        style={{
+          width: 820,
+          height: 360,
+          borderRadius: 36,
+          border: `1.5px dashed ${C.ink}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span style={{ ...mono(22, C.ink), opacity: 0.35 }}>[ COUNTDOWN ]</span>
       </div>
     </div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1200 }}>
-      <ListRow l="KEY → YOUR INBOX" r="CHECK SPAM" color={C.ink} />
-      <ListRow l="EARLY ACCESS" r={keyTime} color={C.ink} rColor={C.blue} />
-      <ListRow l="PUBLIC DROP" r={drop} color={C.ink} />
-      <ListRow l="DATE" r={day} color={C.ink} />
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1220 }}>
+      <ListRow l="GAWHAR & WOUND" r="BACK" color={C.ink} />
+      <ListRow l="NEW PIECES" r="███████" color={C.ink} />
+      <ListRow l="END OF SEASON SALE" r="LIMITED STOCK" color={C.ink} />
+      <ListRow l="EARLY ACCESS · CHECK SPAM" r={keyTime} color={C.ink} rColor={C.blue} />
     </div>
 
     <div style={{ position: "absolute", left: 92, right: 92, top: 1580, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
