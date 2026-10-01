@@ -90,63 +90,27 @@ export const DropStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
 // ─────────────────────── COUNTDOWN STORY ───────────────────────
 // About the drop in general, with a slot sized to IG's countdown sticker (~820×360, rounded).
 export const CountdownStory: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
-  <AbsoluteFill style={{ backgroundColor: C.cream }}>
-    <Corners color={`${C.ink}99`} len={120} />
-    <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
-      <span style={mono(22, C.ink)}>FILE 02 / CL/04</span>
-      <span style={mono(22, C.ink)}>NO.01 GAWHAR</span>
-    </div>
-
-    {/* oversized type sitting behind the garment */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center" }}>
-      <div style={{ ...headline(250, C.ink), lineHeight: 0.86 }}>THE</div>
-      <div style={{ ...headline(250, C.ink), lineHeight: 0.86 }}>DROP</div>
-    </div>
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    {/* the warehouse set from the live posts */}
     <Img
-      src={staticFile("photos/gawhar-flat-cutout.png")}
-      style={{
-        position: "absolute",
-        left: 90,
-        top: 520,
-        width: 900,
-        height: 580,
-        objectFit: "contain",
-        filter: "drop-shadow(0 30px 40px rgba(10,10,10,0.25))",
-      }}
+      src={staticFile("plates/warehouse-cases.jpg")}
+      style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.82) contrast(1.05)" }}
     />
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.15) 30%, rgba(10,10,10,0.15) 55%, rgba(10,10,10,0.7) 100%)" }} />
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1110, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-      <span style={headline(62, C.ink)}>{day}</span>
-      <span style={headline(62, C.blue)}>{drop}</span>
+    {/* frame exactly like the posts */}
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{`CL/04\nEARLY ACCESS ${keyTime}`}</div>
+    <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 14 }}>
+      <div style={{ ...mono(28, C.cream), textAlign: "right" }}>{`${day}\nDROP ${drop}`}</div>
+      <div style={{ width: 24, height: 24, backgroundColor: C.blue }} />
     </div>
 
-    {/* countdown sticker slot — IG countdown at default scale (~820×340) */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1215, display: "flex", justifyContent: "center" }}>
-      <div
-        style={{
-          width: 820,
-          height: 330,
-          borderRadius: 36,
-          border: `1.5px dashed ${C.ink}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span style={{ ...mono(22, C.ink), opacity: 0.35 }}>[ COUNTDOWN ]</span>
-      </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 760, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={headline(118, C.cream)}>The drop</div>
     </div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1576 }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <span style={mono(21, C.ink)}>GAWHAR & WOUND — BACK</span>
-        <span style={mono(21, C.ink)}>+ NEW · EOS SALE</span>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
-        <span style={mono(21, C.blue)}>{`EARLY ACCESS ${keyTime} · CHECK SPAM`}</span>
-        <span style={mono(21, C.gray500)}>THECLOCAL.COM</span>
-      </div>
-    </div>
+    <CountdownSlot color={C.cream} top={920} />
   </AbsoluteFill>
 );
 
