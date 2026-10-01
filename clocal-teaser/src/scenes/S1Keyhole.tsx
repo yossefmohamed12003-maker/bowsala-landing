@@ -1,8 +1,9 @@
-import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { BoardCamera } from "../components/Board";
 import { C, IN_OUT, OUT } from "../brand/theme";
 import { clamp, Mono } from "../components/kit";
 
-// 0–2s. Ink frame, a keyhole. Through it: the warehouse set from the posts, out of focus.
+// 0–2s. Ink frame, a keyhole. Through it: the evidence board, out of focus.
 // Ends by diving through the keyhole into the drop at 2s.
 export const S1Keyhole: React.FC = () => {
   const frame = useCurrentFrame();
@@ -12,18 +13,12 @@ export const S1Keyhole: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink }}>
-      <AbsoluteFill style={{ backgroundColor: C.ink }}>
-        <Img
-          src={staticFile("plates/warehouse-cases.jpg")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            scale: interpolate(frame, [0, 60], [1.35, 1.05], clamp),
-            filter: `blur(${interpolate(frame, [0, 56], [24, 0], clamp)}px)`,
-          }}
-        />
-      </AbsoluteFill>
+      <BoardCamera
+        cx={1100}
+        cy={750}
+        zoom={interpolate(frame, [0, 60], [0.7, 0.46], { ...clamp, easing: IN_OUT })}
+        blur={interpolate(frame, [0, 56], [18, 0], clamp)}
+      />
 
       {/* ink door with keyhole cut-out */}
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>

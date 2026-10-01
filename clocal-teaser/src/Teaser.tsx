@@ -2,6 +2,7 @@ import { Audio } from "@remotion/media";
 import { AbsoluteFill, Sequence, staticFile, useVideoConfig } from "remotion";
 import { Hud } from "./components/Hud";
 import { S1Keyhole } from "./scenes/S1Keyhole";
+import { S1bBoard } from "./scenes/S1bBoard";
 import { S2Identity } from "./scenes/S2Identity";
 import { S3MostWanted } from "./scenes/S3MostWanted";
 import { S4Products } from "./scenes/S4Products";
@@ -25,28 +26,31 @@ export const Teaser: React.FC<TeaserProps> = ({ dayLabel, timeLabel, dropLabel }
       <Sequence name="Keyhole" from={0} durationInFrames={60} premountFor={fps}>
         <S1Keyhole />
       </Sequence>
-      <Sequence name="New identity" from={60} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Evidence board" from={60} durationInFrames={60} premountFor={fps}>
+        <S1bBoard />
+      </Sequence>
+      <Sequence name="New identity" from={120} durationInFrames={60} premountFor={fps}>
         <S2Identity />
       </Sequence>
-      <Sequence name="Most wanted" from={120} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Most wanted" from={180} durationInFrames={60} premountFor={fps}>
         <S3MostWanted />
       </Sequence>
-      <Sequence name="Gawhar & Wound" from={180} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Gawhar & Wound" from={240} durationInFrames={60} premountFor={fps}>
         <S4Products />
       </Sequence>
-      <Sequence name="Big surprises" from={240} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Big surprises" from={300} durationInFrames={60} premountFor={fps}>
         <S5Surprises />
       </Sequence>
-      <Sequence name="EOS sale" from={300} durationInFrames={60} premountFor={fps}>
+      <Sequence name="EOS sale" from={360} durationInFrames={60} premountFor={fps}>
         <S6Sale />
       </Sequence>
-      <Sequence name="Access restricted" from={360} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Access restricted" from={420} durationInFrames={60} premountFor={fps}>
         <S7Access />
       </Sequence>
-      <Sequence name="Early access" from={420} durationInFrames={60} premountFor={fps}>
+      <Sequence name="Early access" from={480} durationInFrames={60} premountFor={fps}>
         <S7EarlyAccess />
       </Sequence>
-      <Sequence name="Finale" from={480} durationInFrames={90} premountFor={fps}>
+      <Sequence name="Finale" from={540} durationInFrames={90} premountFor={fps}>
         <S8Finale dayLabel={dayLabel} timeLabel={timeLabel} />
       </Sequence>
       <Hud dropLabel={dropLabel} />
