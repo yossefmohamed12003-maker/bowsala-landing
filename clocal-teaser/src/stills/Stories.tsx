@@ -243,7 +243,7 @@ export const CountdownC: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
 export const LiveStory: React.FC<StoryProps & { stock: number }> = ({ day, drop, stock }) => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>
     <Img src={staticFile("plates/archive-case.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.78) contrast(1.05)" }} />
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 28%, rgba(10,10,10,0.35) 60%, rgba(10,10,10,0.8) 100%)" }} />
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 28%, rgba(10,10,10,0.4) 58%, rgba(10,10,10,0.88) 72%, rgba(10,10,10,0.92) 100%)" }} />
 
     <Corners color={C.cream} len={150} />
     <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{"CL/04\nEARLY ACCESS / LIVE"}</div>
@@ -259,7 +259,7 @@ export const LiveStory: React.FC<StoryProps & { stock: number }> = ({ day, drop,
 
     <CountdownSlot color={C.cream} top={910} />
 
-    <div style={{ position: "absolute", left: 220, right: 220, top: 1310 }}>
+    <div style={{ position: "absolute", left: 220, right: 220, top: 1300 }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span style={mono(22, C.cream)}>STOCK REMAINING</span>
         <span style={mono(22, C.orange, { fontWeight: 700 })}>{`${String(stock).padStart(3, "0")}%`}</span>
@@ -267,7 +267,30 @@ export const LiveStory: React.FC<StoryProps & { stock: number }> = ({ day, drop,
       <div style={{ height: 6, backgroundColor: "rgba(246,238,227,0.25)", marginTop: 12 }}>
         <div style={{ width: `${stock}%`, height: "100%", backgroundColor: C.orange }} />
       </div>
-      <div style={{ ...mono(22, C.cream), textAlign: "center", marginTop: 30 }}>{`OPENS TO ALL AT ${drop} — DON'T MISS IT`}</div>
+      <div style={{ ...mono(22, C.cream), textAlign: "center", marginTop: 26 }}>{`OPENS TO ALL AT ${drop} — DON'T MISS IT`}</div>
+    </div>
+
+    {/* shop now + link sticker slot */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1450, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <span style={headline(44, C.cream)}>Shop now</span>
+        <svg width={40} height={44} viewBox="0 0 40 44">
+          <path d="M20 2 V38 M6 25 L20 40 L34 25" stroke={C.blue} strokeWidth={7} fill="none" />
+        </svg>
+      </div>
+      <div
+        style={{
+          width: 500,
+          height: 100,
+          borderRadius: 24,
+          border: `1.5px dashed ${C.cream}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span style={{ ...mono(20, C.cream), opacity: 0.5 }}>[ LINK ]</span>
+      </div>
     </div>
   </AbsoluteFill>
 );
