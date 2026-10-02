@@ -294,3 +294,76 @@ export const LiveStory: React.FC<StoryProps & { stock: number }> = ({ day, drop,
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── OPEN STORY — public is live, grab your size ───────────────
+const Thumb: React.FC<{ src: string; w: number; h: number; pos?: string }> = ({ src, w, h, pos = "50% 50%" }) => (
+  <Img src={staticFile(src)} style={{ width: w, height: h, objectFit: "cover", objectPosition: pos, display: "block" }} />
+);
+
+const OfferRow: React.FC<{ thumbs: React.ReactNode; title: [string, string]; lines: string; accent?: string }> = ({ thumbs, title, lines, accent }) => (
+  <div style={{ display: "flex", gap: 36, padding: "26px 0", borderTop: `1px solid ${C.cream}40` }}>
+    <div style={{ display: "flex", gap: 8, width: 268, flexShrink: 0 }}>{thumbs}</div>
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div style={headline(40, C.cream)}>{title[0]}</div>
+      <div style={headline(40, C.cream)}>{title[1]}</div>
+      <div style={{ ...mono(20, accent ?? C.gray300, { lineHeight: 1.5 }), marginTop: 14 }}>{lines}</div>
+    </div>
+  </div>
+);
+
+export const OpenStory: React.FC<StoryProps> = ({ day }) => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Img src={staticFile("plates/warehouse-cases.jpg")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.18 }} />
+    <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(10,10,10,0.3) 0%, ${C.ink} 40%)` }} />
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{"CL/04\nSTATUS / OPEN"}</div>
+    <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 14 }}>
+      <div style={{ ...mono(28, C.cream), textAlign: "right" }}>{`${day}\nLIVE NOW`}</div>
+      <div style={{ width: 24, height: 24, backgroundColor: C.blue }} />
+    </div>
+
+    <div style={{ position: "absolute", left: 92, right: 92, top: 380 }}>
+      <div style={headline(84, C.cream)}>It's open.</div>
+      <div style={headline(84, C.blue)}>Get your size.</div>
+    </div>
+
+    <div style={{ position: "absolute", left: 92, right: 92, top: 590 }}>
+      <OfferRow
+        thumbs={
+          <>
+            <Thumb src="photos/gawhar-model.jpg" w={61} h={250} pos="50% 30%" />
+            <Thumb src="photos/wound-model.jpg" w={61} h={250} pos="50% 30%" />
+            <Thumb src="photos/sleeve.jpg" w={61} h={250} />
+            <Thumb src="photos/sleeve-black.jpg" w={61} h={250} />
+          </>
+        }
+        title={["Free pair", "of sleeves"]}
+        lines={"WITH EVERY GAWHAR & WOUND\n+ ADD AN EXTRA PAIR\n  IN ANOTHER COLOR"}
+      />
+      <OfferRow
+        thumbs={<Thumb src="photos/sweatpants-grey-flat.jpg" w={268} h={250} pos="50% 40%" />}
+        title={["Our first ever", "sweatpants"]}
+        lines="NOW LIVE"
+        accent={C.cream}
+      />
+      <OfferRow
+        thumbs={<Thumb src="photos/basic-tee-black.jpg" w={268} h={250} pos="50% 25%" />}
+        title={["Basic tees", "& tops"]}
+        lines="END OF SEASON SALE"
+        accent={C.orange}
+      />
+    </div>
+
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1524, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <span style={headline(44, C.cream)}>Shop now</span>
+        <svg width={40} height={44} viewBox="0 0 40 44">
+          <path d="M20 2 V38 M6 25 L20 40 L34 25" stroke={C.blue} strokeWidth={7} fill="none" />
+        </svg>
+      </div>
+      <div style={{ width: 500, height: 100, borderRadius: 24, border: `1.5px dashed ${C.cream}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ ...mono(20, C.cream), opacity: 0.5 }}>[ LINK ]</span>
+      </div>
+    </div>
+  </AbsoluteFill>
+);
