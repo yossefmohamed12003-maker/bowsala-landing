@@ -238,3 +238,36 @@ export const CountdownC: React.FC<StoryProps> = ({ day, keyTime, drop }) => (
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── LIVE STORY — early access is in, public at 5 ───────────────
+export const LiveStory: React.FC<StoryProps & { stock: number }> = ({ day, drop, stock }) => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Img src={staticFile("plates/archive-case.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.78) contrast(1.05)" }} />
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 28%, rgba(10,10,10,0.35) 60%, rgba(10,10,10,0.8) 100%)" }} />
+
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{"CL/04\nEARLY ACCESS / LIVE"}</div>
+    <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 14 }}>
+      <div style={{ ...mono(28, C.cream), textAlign: "right" }}>{`${day}\nPUBLIC ${drop}`}</div>
+      <div style={{ width: 24, height: 24, backgroundColor: C.orange }} />
+    </div>
+
+    <div style={{ position: "absolute", left: 0, right: 0, top: 640, textAlign: "center" }}>
+      <div style={headline(96, C.cream)}>Stock is</div>
+      <div style={headline(96, C.cream)}>going fast.</div>
+    </div>
+
+    <CountdownSlot color={C.cream} top={910} />
+
+    <div style={{ position: "absolute", left: 220, right: 220, top: 1310 }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={mono(22, C.cream)}>STOCK REMAINING</span>
+        <span style={mono(22, C.orange, { fontWeight: 700 })}>{`${String(stock).padStart(3, "0")}%`}</span>
+      </div>
+      <div style={{ height: 6, backgroundColor: "rgba(246,238,227,0.25)", marginTop: 12 }}>
+        <div style={{ width: `${stock}%`, height: "100%", backgroundColor: C.orange }} />
+      </div>
+      <div style={{ ...mono(22, C.cream), textAlign: "center", marginTop: 30 }}>{`OPENS TO ALL AT ${drop} — DON'T MISS IT`}</div>
+    </div>
+  </AbsoluteFill>
+);
