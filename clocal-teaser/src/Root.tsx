@@ -1,6 +1,6 @@
 import { Composition, Folder, Still } from "remotion";
 import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
-import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory } from "./stills/Stories";
+import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory, PromoStory } from "./stills/Stories";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -92,6 +92,13 @@ export const RemotionRoot: React.FC = () => {
           width={1080}
           height={1920}
           defaultProps={{ day: "FRI 02.10", keyTime: "4:00 PM", drop: "5:00 PM" }}
+        />
+        <Still
+          id="StoryPromo"
+          component={PromoStory}
+          width={1080}
+          height={1920}
+          defaultProps={{ code: "6OCTOBER", amount: "EGP 50" }}
         />
       </Folder>
     </>

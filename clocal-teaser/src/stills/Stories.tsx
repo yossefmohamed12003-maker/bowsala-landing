@@ -367,3 +367,42 @@ export const OpenStory: React.FC<StoryProps> = ({ day }) => (
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── PROMO STORY — Gawhar only, one code, one CTA ───────────────
+export const PromoStory: React.FC<{ code: string; amount: string }> = ({ code, amount }) => (
+  <AbsoluteFill style={{ backgroundColor: C.cream }}>
+    <Corners color={`${C.ink}99`} len={120} />
+
+    <div style={{ position: "absolute", left: 0, right: 0, top: 290, textAlign: "center" }}>
+      <div style={headline(104, C.ink)}>{`${amount} off`}</div>
+      <div style={{ ...mono(26, C.ink), marginTop: 18 }}>EVERYTHING ON THECLOCAL.COM</div>
+    </div>
+
+    <Img
+      src={staticFile("photos/gawhar-flat-cutout.png")}
+      style={{
+        position: "absolute",
+        left: 120,
+        top: 520,
+        width: 840,
+        height: 640,
+        objectFit: "contain",
+        filter: "drop-shadow(0 28px 36px rgba(10,10,10,0.22))",
+      }}
+    />
+
+    {/* the code — the one thing to remember */}
+    <div style={{ position: "absolute", left: 140, right: 140, top: 1200, backgroundColor: C.blue, padding: "26px 0 30px", textAlign: "center" }}>
+      <div style={mono(24, C.cream)}>USE CODE</div>
+      <div style={{ ...headline(88, C.cream), letterSpacing: "0.02em", marginTop: 8 }}>{code}</div>
+    </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1410, textAlign: "center", ...mono(24, C.ink) }}>FOR 24 HOURS ONLY</div>
+
+    {/* link sticker slot */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1480, display: "flex", justifyContent: "center" }}>
+      <div style={{ width: 500, height: 100, borderRadius: 24, border: `1.5px dashed ${C.ink}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ ...mono(20, C.ink), opacity: 0.4 }}>[ LINK ]</span>
+      </div>
+    </div>
+  </AbsoluteFill>
+);
