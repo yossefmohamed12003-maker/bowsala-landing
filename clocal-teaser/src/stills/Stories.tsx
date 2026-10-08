@@ -406,3 +406,37 @@ export const PromoStory: React.FC<{ code: string; amount: string }> = ({ code, a
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── POLL STORY — restock the Dragon Crewneck? ───────────────
+export const PollStory: React.FC = () => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Img src={staticFile("dragon/front.jpg")} style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 1440, objectFit: "cover", objectPosition: "50% 20%" }} />
+    <AbsoluteFill
+      style={{ background: `linear-gradient(180deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.35) 14%, rgba(10,10,10,0) 24%, rgba(10,10,10,0) 58%, ${C.ink} 75%)` }}
+    />
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{"DRAGON CREWNECK\nLAST SEASON"}</div>
+    <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 14 }}>
+      <div style={{ ...mono(28, C.cream), textAlign: "right" }}>{"BEST SELLER\nSOLD OUT"}</div>
+      <div style={{ width: 24, height: 24, backgroundColor: C.blue }} />
+    </div>
+
+    {/* the back print, as a detail */}
+    <div style={{ position: "absolute", right: 80, top: 1000, width: 250, rotate: "3deg", backgroundColor: C.cream, padding: 8 }}>
+      <Img src={staticFile("dragon/back-print.jpg")} style={{ width: "100%", height: 210, objectFit: "cover", display: "block" }} />
+      <div style={{ ...mono(16, C.ink), padding: "8px 2px 0" }}>BACK — DRAGONS</div>
+    </div>
+
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1170 }}>
+      <div style={headline(70, C.cream)}>Bring it</div>
+      <div style={headline(70, C.blue)}>back?</div>
+    </div>
+
+    {/* poll sticker slot (~640×340) */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1335, display: "flex", justifyContent: "center" }}>
+      <div style={{ width: 640, height: 330, borderRadius: 28, border: `1.5px dashed ${C.cream}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ ...mono(22, C.cream), opacity: 0.5 }}>[ POLL ]</span>
+      </div>
+    </div>
+  </AbsoluteFill>
+);
