@@ -1,6 +1,6 @@
 import { Composition, Folder, Still } from "remotion";
 import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
-import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory, PollStory, PromoStory } from "./stills/Stories";
+import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory, PollB, PollC, PollD, PollStory, PromoStory } from "./stills/Stories";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -101,6 +101,9 @@ export const RemotionRoot: React.FC = () => {
           defaultProps={{ code: "6OCTOBER", amount: "EGP 50" }}
         />
         <Still id="StoryPoll" component={PollStory} width={1080} height={1920} />
+        <Still id="StoryPollB" component={PollB} width={1080} height={1920} />
+        <Still id="StoryPollC" component={PollC} width={1080} height={1920} />
+        <Still id="StoryPollD" component={PollD} width={1080} height={1920} />
       </Folder>
     </>
   );

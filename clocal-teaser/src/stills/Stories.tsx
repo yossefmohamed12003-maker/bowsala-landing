@@ -440,3 +440,93 @@ export const PollStory: React.FC = () => (
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── POLL — alternative ideas ───────────────
+const PollSlot: React.FC<{ color: string; top: number }> = ({ color, top }) => (
+  <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center" }}>
+    <div style={{ width: 640, height: 330, borderRadius: 28, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ ...mono(22, color), opacity: 0.5 }}>[ POLL ]</span>
+    </div>
+  </div>
+);
+
+// B — case file: front & back as evidence on cream, the verdict is yours.
+export const PollB: React.FC = () => (
+  <AbsoluteFill style={{ backgroundColor: C.cream }}>
+    <Corners color={`${C.ink}99`} len={120} />
+    <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
+      <span style={mono(24, C.ink)}>CASE FILE / DRAGON CREWNECK</span>
+      <span style={mono(24, C.orange)}>SOLD OUT</span>
+    </div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 320, display: "flex", gap: 16 }}>
+      {[
+        ["dragon/front.jpg", "50% 35%", "FRONT"],
+        ["dragon/back.jpg", "30% 55%", "BACK"],
+      ].map(([src, pos, label]) => (
+        <div key={label} style={{ flex: 1 }}>
+          <Img src={staticFile(src)} style={{ width: "100%", height: 640, objectFit: "cover", objectPosition: pos, display: "block" }} />
+          <div style={{ ...mono(20, C.gray500), marginTop: 10 }}>{label}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1040 }}>
+      <div style={mono(22, C.gray500)}>LAST SEASON'S BEST SELLER</div>
+      <div style={{ ...headline(76, C.ink), marginTop: 14 }}>Restock it?</div>
+    </div>
+    <PollSlot color={C.ink} top={1250} />
+  </AbsoluteFill>
+);
+
+// C — the SOLD OUT stamp: warehouse portrait, stamped, question underneath.
+export const PollC: React.FC = () => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Img src={staticFile("dragon/warehouse.jpg")} style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 1500, objectFit: "cover", objectPosition: "50% 30%" }} />
+    <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0) 18%, rgba(10,10,10,0) 55%, ${C.ink} 78%)` }} />
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(28, C.cream) }}>{"DRAGON CREWNECK\nLAST SEASON / BEST SELLER"}</div>
+    <div
+      style={{
+        position: "absolute",
+        left: 250,
+        top: 820,
+        rotate: "-10deg",
+        border: `8px solid ${C.orange}`,
+        padding: "8px 30px",
+        ...headline(96, C.orange),
+        backgroundColor: "rgba(10,10,10,0.25)",
+      }}
+    >
+      SOLD OUT
+    </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1110, textAlign: "center" }}>
+      <div style={headline(70, C.cream)}>Should it</div>
+      <div style={headline(70, C.cream)}>come back?</div>
+    </div>
+    <PollSlot color={C.cream} top={1310} />
+  </AbsoluteFill>
+);
+
+// D — contact strip: three frames of the Dragon on top, oversized name, poll.
+export const PollD: React.FC = () => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Corners color={`${C.cream}99`} len={120} />
+    <div style={{ position: "absolute", left: 0, right: 0, top: 220, display: "flex", gap: 8, justifyContent: "center" }}>
+      {[
+        ["dragon/sky.jpg", "50% 40%"],
+        ["dragon/girl-low.jpg", "50% 40%"],
+        ["dragon/fence.jpg", "60% 40%"],
+      ].map(([src, pos]) => (
+        <Img key={src} src={staticFile(src)} style={{ width: 340, height: 600, objectFit: "cover", objectPosition: pos }} />
+      ))}
+    </div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 860, display: "flex", justifyContent: "space-between" }}>
+      <span style={mono(22, C.gray300)}>LAST SEASON'S #1</span>
+      <span style={mono(22, C.orange)}>STATUS / SOLD OUT</span>
+    </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 920, textAlign: "center" }}>
+      <div style={headline(150, C.cream)}>Dragon</div>
+      <div style={{ ...mono(26, C.cream), marginTop: 6 }}>CREWNECK — RESTOCK OR NOT?</div>
+    </div>
+    <PollSlot color={C.cream} top={1250} />
+  </AbsoluteFill>
+);
