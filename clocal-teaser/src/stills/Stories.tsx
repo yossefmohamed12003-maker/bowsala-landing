@@ -427,24 +427,20 @@ export const PollStory: React.FC = () => (
       <div style={{ ...mono(16, C.ink), padding: "8px 2px 0" }}>BACK — DRAGONS</div>
     </div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1170 }}>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1130 }}>
       <div style={headline(70, C.cream)}>Bring it</div>
       <div style={headline(70, C.blue)}>back?</div>
     </div>
 
-    {/* poll sticker slot (~640×340) */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1335, display: "flex", justifyContent: "center" }}>
-      <div style={{ width: 640, height: 330, borderRadius: 28, border: `1.5px dashed ${C.cream}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ ...mono(22, C.cream), opacity: 0.5 }}>[ POLL ]</span>
-      </div>
-    </div>
+    <PollSlot color={C.cream} top={1287} />
   </AbsoluteFill>
 );
 
 // ─────────────── POLL — alternative ideas ───────────────
+// Slot measured from the IG poll sticker at default scale (2 options): 532×390, radius 28.
 const PollSlot: React.FC<{ color: string; top: number }> = ({ color, top }) => (
   <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center" }}>
-    <div style={{ width: 640, height: 330, borderRadius: 28, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: 532, height: 390, borderRadius: 28, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
       <span style={{ ...mono(22, color), opacity: 0.5 }}>[ POLL ]</span>
     </div>
   </div>
@@ -473,7 +469,7 @@ export const PollB: React.FC = () => (
       <div style={mono(22, C.gray500)}>LAST SEASON'S BEST SELLER</div>
       <div style={{ ...headline(76, C.ink), marginTop: 14 }}>Restock it?</div>
     </div>
-    <PollSlot color={C.ink} top={1250} />
+    <PollSlot color={C.ink} top={1287} />
   </AbsoluteFill>
 );
 
@@ -502,7 +498,7 @@ export const PollC: React.FC = () => (
       <div style={headline(70, C.cream)}>Should it</div>
       <div style={headline(70, C.cream)}>come back?</div>
     </div>
-    <PollSlot color={C.cream} top={1310} />
+    <PollSlot color={C.cream} top={1287} />
   </AbsoluteFill>
 );
 
@@ -527,6 +523,6 @@ export const PollD: React.FC = () => (
       <div style={headline(150, C.cream)}>Dragon</div>
       <div style={{ ...mono(26, C.cream), marginTop: 6 }}>CREWNECK — RESTOCK OR NOT?</div>
     </div>
-    <PollSlot color={C.cream} top={1250} />
+    <PollSlot color={C.cream} top={1287} />
   </AbsoluteFill>
 );
