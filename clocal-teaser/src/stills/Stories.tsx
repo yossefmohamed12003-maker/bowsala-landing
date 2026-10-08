@@ -432,15 +432,15 @@ export const PollStory: React.FC = () => (
       <div style={headline(70, C.blue)}>back?</div>
     </div>
 
-    <PollSlot color={C.cream} top={1287} />
+    <PollSlot color={C.cream} top={1332} />
   </AbsoluteFill>
 );
 
 // ─────────────── POLL — alternative ideas ───────────────
-// Slot measured from the IG poll sticker at default scale (2 options): 532×390, radius 28.
+// Slot measured from the IG poll sticker (2 options, no question line): 562×290, radius 34.
 const PollSlot: React.FC<{ color: string; top: number }> = ({ color, top }) => (
   <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center" }}>
-    <div style={{ width: 532, height: 390, borderRadius: 28, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: 562, height: 290, borderRadius: 34, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
       <span style={{ ...mono(22, color), opacity: 0.5 }}>[ POLL ]</span>
     </div>
   </div>
@@ -469,7 +469,7 @@ export const PollB: React.FC = () => (
       <div style={mono(22, C.gray500)}>LAST SEASON'S BEST SELLER</div>
       <div style={{ ...headline(76, C.ink), marginTop: 14 }}>Restock it?</div>
     </div>
-    <PollSlot color={C.ink} top={1287} />
+    <PollSlot color={C.ink} top={1332} />
   </AbsoluteFill>
 );
 
@@ -498,7 +498,7 @@ export const PollC: React.FC = () => (
       <div style={headline(70, C.cream)}>Should it</div>
       <div style={headline(70, C.cream)}>come back?</div>
     </div>
-    <PollSlot color={C.cream} top={1287} />
+    <PollSlot color={C.cream} top={1332} />
   </AbsoluteFill>
 );
 
@@ -523,6 +523,6 @@ export const PollD: React.FC = () => (
       <div style={headline(150, C.cream)}>Dragon</div>
       <div style={{ ...mono(26, C.cream), marginTop: 6 }}>CREWNECK — RESTOCK OR NOT?</div>
     </div>
-    <PollSlot color={C.cream} top={1287} />
+    <PollSlot color={C.cream} top={1332} />
   </AbsoluteFill>
 );
