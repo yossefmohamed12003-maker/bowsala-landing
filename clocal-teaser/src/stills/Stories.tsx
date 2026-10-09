@@ -642,7 +642,7 @@ export const PriceA: React.FC<{ was: string; now: string }> = ({ was, now }) => 
 export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>
     {/* single overhead light */}
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse 66% 36% at 50% 37%, #6B675F 0%, #3A3835 42%, #161616 78%, #0A0A0A 100%)" }} />
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 75% 42% at 50% 36%, #5C5852 0%, #403D39 40%, #22211F 75%, #141413 100%)" }} />
     <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(246,238,227,0.05) 0%, rgba(10,10,10,0) 30%)" }} />
     <Corners color={`${C.cream}99`} len={120} />
     <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
@@ -654,7 +654,7 @@ export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => 
     <div style={{ position: "absolute", left: 230, top: 1110, width: 620, height: 60, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.9)", filter: "blur(28px)" }} />
     <Img
       src={staticFile("basic/flat-cutout.png")}
-      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "grayscale(0.85) brightness(1.5) contrast(1.15) drop-shadow(0 0 1.5px rgba(246,238,227,0.35)) drop-shadow(0 34px 50px rgba(0,0,0,0.75))" }}
+      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "contrast(1.04) drop-shadow(0 34px 46px rgba(0,0,0,0.6))" }}
     />
 
     {/* string + hangtag */}
