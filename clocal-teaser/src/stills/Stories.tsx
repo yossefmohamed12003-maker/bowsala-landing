@@ -653,9 +653,32 @@ export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => 
     {/* ground shadow + the tee */}
     <div style={{ position: "absolute", left: 230, top: 1110, width: 620, height: 60, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.9)", filter: "blur(28px)" }} />
     <Img
-      src={staticFile("basic/flat-cutout.png")}
-      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "contrast(1.04) drop-shadow(0 34px 46px rgba(0,0,0,0.6))" }}
+      src={staticFile("basic/flat-enh-cutout.png")}
+      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "drop-shadow(0 34px 46px rgba(0,0,0,0.6))" }}
     />
+    {/* soft overhead sheen, clipped to the garment, gives the cotton weight and volume */}
+    <div
+      style={{
+        position: "absolute",
+        left: 130,
+        top: 360,
+        width: 820,
+        height: 759,
+        WebkitMaskImage: `url(${staticFile("basic/flat-enh-cutout.png")})`,
+        WebkitMaskSize: "100% 100%",
+        maskImage: `url(${staticFile("basic/flat-enh-cutout.png")})`,
+        maskSize: "100% 100%",
+        background:
+          "radial-gradient(ellipse 65% 40% at 45% 16%, rgba(246,238,227,0.35) 0%, rgba(246,238,227,0.1) 45%, rgba(0,0,0,0) 70%), linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%)",
+        mixBlendMode: "soft-light",
+      }}
+    />
+
+    {/* fabric detail loupe */}
+    <div style={{ position: "absolute", left: 742, top: 300, width: 240, height: 240, borderRadius: 120, overflow: "hidden", border: `3px solid ${C.cream}`, boxShadow: "0 18px 40px rgba(0,0,0,0.6)" }}>
+      <Img src={staticFile("basic/collar.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    </div>
+    <div style={{ position: "absolute", left: 742, top: 556, width: 240, textAlign: "center", ...mono(16, C.cream, { lineHeight: 1.5 }) }}>{"DETAIL — COLLAR\nHEAVYWEIGHT COTTON"}</div>
 
     {/* string + hangtag */}
     <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
