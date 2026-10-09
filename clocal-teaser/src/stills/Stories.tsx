@@ -640,66 +640,47 @@ export const PriceA: React.FC<{ was: string; now: string }> = ({ was, now }) => 
 
 // B — object: the tee alone on ink under a single light, the price on a hangtag.
 export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => (
-  <AbsoluteFill style={{ backgroundColor: C.ink }}>
-    {/* single overhead light */}
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse 75% 42% at 50% 36%, #5C5852 0%, #403D39 40%, #22211F 75%, #141413 100%)" }} />
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(246,238,227,0.05) 0%, rgba(10,10,10,0) 30%)" }} />
-    <Corners color={`${C.cream}99`} len={120} />
+  <AbsoluteFill style={{ backgroundColor: "#D9D4CB" }}>
+    {/* soft studio light: the black tee reads on a pale stone sweep */}
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 80% 45% at 50% 38%, #F1EEE8 0%, #E3DED5 45%, #CFC8BD 100%)" }} />
+    <Corners color={`${C.ink}55`} len={120} />
     <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
-      <span style={mono(22, C.gray300, { letterSpacing: "0.16em" })}>BASIC TEE</span>
-      <span style={mono(22, C.gray300, { letterSpacing: "0.16em" })}>BLACK / 01</span>
+      <span style={mono(22, C.gray500, { letterSpacing: "0.16em" })}>BASIC TEE</span>
+      <span style={mono(22, C.gray500, { letterSpacing: "0.16em" })}>BLACK / 01</span>
     </div>
 
-    {/* ground shadow + the tee */}
-    <div style={{ position: "absolute", left: 230, top: 1110, width: 620, height: 60, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.9)", filter: "blur(28px)" }} />
+    {/* the tee, straight from the shoot — no retouching */}
     <Img
-      src={staticFile("basic/flat-enh-cutout.png")}
-      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "drop-shadow(0 34px 46px rgba(0,0,0,0.6))" }}
-    />
-    {/* soft overhead sheen, clipped to the garment, gives the cotton weight and volume */}
-    <div
+      src={staticFile("basic/tee-real-cutout.png")}
       style={{
         position: "absolute",
-        left: 130,
-        top: 360,
-        width: 820,
-        height: 759,
-        WebkitMaskImage: `url(${staticFile("basic/flat-enh-cutout.png")})`,
-        WebkitMaskSize: "100% 100%",
-        maskImage: `url(${staticFile("basic/flat-enh-cutout.png")})`,
-        maskSize: "100% 100%",
-        background:
-          "radial-gradient(ellipse 65% 40% at 45% 16%, rgba(246,238,227,0.35) 0%, rgba(246,238,227,0.1) 45%, rgba(0,0,0,0) 70%), linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%)",
-        mixBlendMode: "soft-light",
+        left: 70,
+        top: 390,
+        width: 940,
+        filter: "drop-shadow(0 4px 6px rgba(40,30,20,0.35)) drop-shadow(0 30px 50px rgba(40,30,20,0.25))",
       }}
     />
 
-    {/* fabric detail loupe */}
-    <div style={{ position: "absolute", left: 742, top: 300, width: 240, height: 240, borderRadius: 120, overflow: "hidden", border: `3px solid ${C.cream}`, boxShadow: "0 18px 40px rgba(0,0,0,0.6)" }}>
-      <Img src={staticFile("basic/collar.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-    </div>
-    <div style={{ position: "absolute", left: 742, top: 556, width: 240, textAlign: "center", ...mono(16, C.cream, { lineHeight: 1.5 }) }}>{"DETAIL — COLLAR\nHEAVYWEIGHT COTTON"}</div>
-
     {/* string + hangtag */}
     <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
-      <path d="M 742 1098 C 760 1130, 760 1160, 748 1196" stroke={C.cream} strokeWidth={2} fill="none" opacity={0.85} />
+      <path d="M 778 1060 C 796 1094, 796 1124, 784 1158" stroke={C.ink} strokeWidth={2} fill="none" opacity={0.8} />
     </svg>
     <div
       style={{
         position: "absolute",
-        left: 610,
-        top: 1180,
+        left: 646,
+        top: 1142,
         width: 290,
         rotate: "-5deg",
         transformOrigin: "140px 16px",
         backgroundColor: C.cream,
         padding: "20px 24px 22px",
-        boxShadow: "0 22px 44px rgba(0,0,0,0.6)",
+        boxShadow: "0 18px 36px rgba(40,30,20,0.28)",
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Monogram width={34} color={C.ink} />
-        <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: C.ink }} />
+        <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#CFC8BD" }} />
         <span style={mono(15, C.gray500)}>EOS</span>
       </div>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 14 }}>
@@ -715,12 +696,12 @@ export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => 
       </div>
     </div>
 
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1240 }}>
-      <div style={headline(60, C.cream)}>Built</div>
-      <div style={headline(60, C.cream)}>to repeat.</div>
-      <div style={{ ...mono(19, C.gray300, { lineHeight: 1.6 }), marginTop: 16 }}>{"100% COTTON\nRELAXED FIT\nEND OF SEASON"}</div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1200 }}>
+      <div style={headline(60, C.ink)}>Built</div>
+      <div style={headline(60, C.ink)}>to repeat.</div>
+      <div style={{ ...mono(19, C.gray500, { lineHeight: 1.6 }), marginTop: 16 }}>{"100% COTTON\nRELAXED FIT\nEND OF SEASON"}</div>
     </div>
-    <LinkSlot color={C.cream} top={1555} label="[ SHOP — THECLOCAL.COM ]" />
-    <Grain2 opacity={0.1} />
+    <LinkSlot color={C.ink} top={1555} label="[ SHOP — THECLOCAL.COM ]" />
+    <Grain2 opacity={0.06} />
   </AbsoluteFill>
 );
