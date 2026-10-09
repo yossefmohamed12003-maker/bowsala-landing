@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { C, F } from "../brand/theme";
-import { headline, Wordmark } from "../components/kit";
+import { headline, Monogram, Wordmark } from "../components/kit";
 
 // Instagram story stills (1080×1920). Key content stays inside the IG safe zone
 // (≈250px clear at top, ≈250px at bottom). Marked slots are where the IG link /
@@ -638,33 +638,66 @@ export const PriceA: React.FC<{ was: string; now: string }> = ({ was, now }) => 
   </AbsoluteFill>
 );
 
-// B — object: the tee alone on ink under a single light, label like a hangtag.
+// B — object: the tee alone on ink under a single light, the price on a hangtag.
 export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse 55% 32% at 50% 40%, rgba(246,238,227,0.16) 0%, rgba(10,10,10,0) 100%)" }} />
+    {/* single overhead light */}
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 48% 30% at 50% 36%, rgba(246,238,227,0.13) 0%, rgba(246,238,227,0.04) 55%, rgba(10,10,10,0) 100%)" }} />
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(246,238,227,0.05) 0%, rgba(10,10,10,0) 30%)" }} />
     <Corners color={`${C.cream}99`} len={120} />
-    <div style={{ position: "absolute", left: 0, right: 0, top: 250, textAlign: "center", ...mono(24, C.gray300, { letterSpacing: "0.2em" }) }}>
-      CLOCAL — BASIC TEE — BLACK
+    <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
+      <span style={mono(22, C.gray300, { letterSpacing: "0.16em" })}>BASIC TEE</span>
+      <span style={mono(22, C.gray300, { letterSpacing: "0.16em" })}>BLACK / 01</span>
     </div>
+
+    {/* ground shadow + the tee */}
+    <div style={{ position: "absolute", left: 230, top: 1110, width: 620, height: 60, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.9)", filter: "blur(28px)" }} />
     <Img
       src={staticFile("basic/flat-cutout.png")}
-      style={{ position: "absolute", left: 90, top: 360, width: 900, filter: "brightness(1.35) contrast(1.1) drop-shadow(0 40px 60px rgba(0,0,0,0.8))" }}
+      style={{ position: "absolute", left: 130, top: 360, width: 820, filter: "grayscale(0.85) brightness(1.18) contrast(1.12) drop-shadow(0 30px 50px rgba(0,0,0,0.85))" }}
     />
-    {/* hangtag */}
-    <div style={{ position: "absolute", left: 640, top: 1030, rotate: "-6deg", width: 300, backgroundColor: C.cream, padding: "22px 24px", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}>
-      <div style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: C.ink, margin: "0 auto 16px" }} />
-      <div style={mono(18, C.gray500)}>EOS PRICE</div>
-      <div style={{ ...headline(64, C.ink), marginTop: 6 }}>{now}</div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
-        <span style={mono(18, C.ink)}>EGP</span>
-        <span style={{ ...mono(18, C.gray500), textDecoration: `line-through ${C.orange} 2px` }}>{`WAS ${was}`}</span>
+
+    {/* string + hangtag */}
+    <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
+      <path d="M 742 1098 C 760 1130, 760 1160, 748 1196" stroke={C.cream} strokeWidth={2} fill="none" opacity={0.85} />
+    </svg>
+    <div
+      style={{
+        position: "absolute",
+        left: 610,
+        top: 1180,
+        width: 290,
+        rotate: "-5deg",
+        transformOrigin: "140px 16px",
+        backgroundColor: C.cream,
+        padding: "20px 24px 22px",
+        boxShadow: "0 22px 44px rgba(0,0,0,0.6)",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Monogram width={34} color={C.ink} />
+        <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: C.ink }} />
+        <span style={mono(15, C.gray500)}>EOS</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 14 }}>
+        <span style={headline(66, C.ink)}>{now}</span>
+        <span style={mono(20, C.ink)}>EGP</span>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10, paddingTop: 10, borderTop: `1px dashed ${C.ink}66` }}>
+        <span style={mono(15, C.gray500)}>WAS</span>
+        <span style={{ position: "relative", ...mono(15, C.gray500) }}>
+          {`${was} EGP`}
+          <span style={{ position: "absolute", left: -3, right: -3, top: "50%", height: 2, backgroundColor: C.orange }} />
+        </span>
       </div>
     </div>
-    <div style={{ position: "absolute", left: 92, right: 92, top: 1320 }}>
-      <div style={headline(80, C.cream)}>Built to repeat.</div>
-      <div style={{ ...mono(22, C.gray300), marginTop: 14 }}>100% COTTON · RELAXED FIT · END OF SEASON</div>
+
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1240 }}>
+      <div style={headline(60, C.cream)}>Built</div>
+      <div style={headline(60, C.cream)}>to repeat.</div>
+      <div style={{ ...mono(19, C.gray300, { lineHeight: 1.6 }), marginTop: 16 }}>{"100% COTTON\nRELAXED FIT\nEND OF SEASON"}</div>
     </div>
-    <LinkSlot color={C.cream} top={1540} label="[ SHOP — THECLOCAL.COM ]" />
+    <LinkSlot color={C.cream} top={1555} label="[ SHOP — THECLOCAL.COM ]" />
     <Grain2 opacity={0.1} />
   </AbsoluteFill>
 );
