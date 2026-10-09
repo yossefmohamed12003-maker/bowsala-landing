@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { C, F } from "../brand/theme";
-import { headline } from "../components/kit";
+import { headline, Wordmark } from "../components/kit";
 
 // Instagram story stills (1080×1920). Key content stays inside the IG safe zone
 // (≈250px clear at top, ≈250px at bottom). Marked slots are where the IG link /
@@ -524,5 +524,65 @@ export const PollD: React.FC = () => (
       <div style={{ ...mono(26, C.cream), marginTop: 6 }}>CREWNECK — RESTOCK OR NOT?</div>
     </div>
     <PollSlot color={C.cream} top={1332} />
+  </AbsoluteFill>
+);
+
+// ─────────────── PRICE STORY — Basic Tee, EOS price ───────────────
+const STUDIO = "#DDDCE2"; // matches the studio backdrop so the photo bleeds in seamlessly
+
+export const PriceStory: React.FC<{ name: string; was: string; now: string }> = ({ name, was, now }) => (
+  <AbsoluteFill style={{ backgroundColor: STUDIO }}>
+    {/* model, cropped head to hips, bleeding into the backdrop */}
+    <div
+      style={{
+        position: "absolute",
+        left: 0,
+        top: 270,
+        width: 820,
+        height: 960,
+        overflow: "hidden",
+        WebkitMaskImage: "radial-gradient(ellipse 62% 70% at 50% 42%, #000 62%, transparent 100%)",
+        maskImage: "radial-gradient(ellipse 62% 70% at 50% 42%, #000 62%, transparent 100%)",
+      }}
+    >
+      <Img src={staticFile("basic/woman.jpg")} style={{ width: 820, height: "auto", display: "block", marginTop: -20, filter: "brightness(0.97)" }} />
+    </div>
+
+    {/* header */}
+    <div style={{ position: "absolute", left: 80, right: 80, top: 210, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Wordmark width={170} color={C.ink} />
+      <span style={mono(24, C.ink, { letterSpacing: "0.16em" })}>{name}</span>
+    </div>
+
+    {/* flat lay, overlapping the model */}
+    <Img src={staticFile("basic/flat-cutout.png")} style={{ position: "absolute", left: 600, top: 560, width: 420, filter: "drop-shadow(0 22px 26px rgba(10,10,10,0.25))" }} />
+    <div style={{ position: "absolute", right: 80, top: 970, ...mono(20, C.gray500, { textAlign: "right" }) }}>{"FIG. 01 — FRONT\nBLACK"}</div>
+
+    {/* price */}
+    <div style={{ position: "absolute", left: 80, right: 80, top: 1210, borderTop: `1.5px solid ${C.ink}33`, paddingTop: 22 }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={mono(22, C.ink)}>100% COTTON · RELAXED FIT</span>
+        <span style={mono(22, C.orange)}>END OF SEASON</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginTop: 18 }}>
+        <span style={mono(24, C.gray500)}>INSTEAD OF</span>
+        <span style={{ position: "relative", ...headline(46, C.gray500) }}>
+          {was}
+          <span style={{ position: "absolute", left: -6, right: -6, top: "48%", height: 5, backgroundColor: C.blue }} />
+        </span>
+      </div>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 18, marginTop: 4 }}>
+        <span style={{ ...headline(250, C.ink), lineHeight: 0.86, letterSpacing: "-0.04em" }}>{now}</span>
+        <span style={{ ...mono(40, C.ink), marginBottom: 14 }}>EGP</span>
+      </div>
+    </div>
+
+    {/* link sticker slot */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1545, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+      <span style={mono(22, C.blue, { fontWeight: 600, letterSpacing: "0.16em" })}>SHOP NOW ↓</span>
+      <div style={{ width: 500, height: 100, borderRadius: 24, border: `1.5px dashed ${C.ink}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ ...mono(20, C.ink), opacity: 0.4 }}>[ LINK ]</span>
+      </div>
+    </div>
   </AbsoluteFill>
 );
