@@ -1,6 +1,6 @@
 import { Composition, Folder, Still } from "remotion";
 import { HOWTO_DURATION, SignupHowTo } from "./howto/SignupHowTo";
-import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory, PollB, PollC, PollD, PollStory, PriceStory, PromoStory } from "./stills/Stories";
+import { CountdownA, CountdownB, CountdownC, CountdownStory, DropStory, LiveStory, OpenStory, PollB, PollC, PollD, PollStory, PriceA, PriceB, PriceStory, PromoStory } from "./stills/Stories";
 import { Teaser } from "./Teaser";
 
 export const RemotionRoot: React.FC = () => {
@@ -105,6 +105,8 @@ export const RemotionRoot: React.FC = () => {
         <Still id="StoryPollC" component={PollC} width={1080} height={1920} />
         <Still id="StoryPollD" component={PollD} width={1080} height={1920} />
         <Still id="StoryPriceBasicTee" component={PriceStory} width={1080} height={1920} defaultProps={{ name: "BASIC TEE", was: "600", now: "249" }} />
+        <Still id="StoryPriceA" component={PriceA} width={1080} height={1920} defaultProps={{ was: "600", now: "249" }} />
+        <Still id="StoryPriceB" component={PriceB} width={1080} height={1920} defaultProps={{ was: "600", now: "249" }} />
       </Folder>
     </>
   );

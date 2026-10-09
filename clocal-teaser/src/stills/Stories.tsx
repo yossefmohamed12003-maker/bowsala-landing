@@ -586,3 +586,85 @@ export const PriceStory: React.FC<{ name: string; was: string; now: string }> = 
     </div>
   </AbsoluteFill>
 );
+
+// ─────────────── PRICE — premium streetwear directions ───────────────
+const Grain2: React.FC<{ opacity?: number }> = ({ opacity = 0.14 }) => (
+  <AbsoluteFill
+    style={{
+      opacity,
+      mixBlendMode: "overlay",
+      backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")`,
+    }}
+  />
+);
+
+const LinkSlot: React.FC<{ color: string; top: number; label?: string }> = ({ color, top, label = "[ LINK ]" }) => (
+  <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center" }}>
+    <div style={{ width: 500, height: 100, borderRadius: 24, border: `1.5px dashed ${color}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ ...mono(20, color), opacity: 0.5 }}>{label}</span>
+    </div>
+  </div>
+);
+
+// A — editorial: monochrome portrait, tight crop, quiet price.
+export const PriceA: React.FC<{ was: string; now: string }> = ({ was, now }) => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <Img
+      src={staticFile("basic/woman.jpg")}
+      style={{ position: "absolute", left: -260, top: -120, width: 1600, height: "auto", filter: "grayscale(1) contrast(1.45) brightness(0.72)" }}
+    />
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 70% 55% at 50% 35%, rgba(10,10,10,0) 40%, rgba(10,10,10,0.85) 100%)" }} />
+    <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0) 20%, rgba(10,10,10,0) 50%, ${C.ink} 72%)` }} />
+    <Corners color={C.cream} len={150} />
+    <div style={{ position: "absolute", left: 92, top: 250, ...mono(26, C.cream) }}>{"CL/04\nNO. 03 — BASIC TEE"}</div>
+    <div style={{ position: "absolute", right: 92, top: 250, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
+      <div style={{ ...mono(26, C.cream), textAlign: "right" }}>{"100% COTTON\nRELAXED FIT"}</div>
+      <div style={{ width: 22, height: 22, backgroundColor: C.blue }} />
+    </div>
+
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1210 }}>
+      <div style={headline(96, C.cream)}>The basic.</div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 26, marginTop: 26, paddingTop: 22, borderTop: `1px solid ${C.cream}40` }}>
+        <span style={headline(84, C.cream)}>{`${now} EGP`}</span>
+        <span style={{ position: "relative", ...mono(30, C.gray300) }}>
+          {was}
+          <span style={{ position: "absolute", left: -4, right: -4, top: "50%", height: 3, backgroundColor: C.orange }} />
+        </span>
+      </div>
+      <div style={{ ...mono(20, C.gray300), marginTop: 12 }}>END OF SEASON — WHILE STOCK LASTS</div>
+    </div>
+    <LinkSlot color={C.cream} top={1560} label="[ SHOP — THECLOCAL.COM ]" />
+    <Grain2 />
+  </AbsoluteFill>
+);
+
+// B — object: the tee alone on ink under a single light, label like a hangtag.
+export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => (
+  <AbsoluteFill style={{ backgroundColor: C.ink }}>
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 55% 32% at 50% 40%, rgba(246,238,227,0.16) 0%, rgba(10,10,10,0) 100%)" }} />
+    <Corners color={`${C.cream}99`} len={120} />
+    <div style={{ position: "absolute", left: 0, right: 0, top: 250, textAlign: "center", ...mono(24, C.gray300, { letterSpacing: "0.2em" }) }}>
+      CLOCAL — BASIC TEE — BLACK
+    </div>
+    <Img
+      src={staticFile("basic/flat-cutout.png")}
+      style={{ position: "absolute", left: 90, top: 360, width: 900, filter: "brightness(1.35) contrast(1.1) drop-shadow(0 40px 60px rgba(0,0,0,0.8))" }}
+    />
+    {/* hangtag */}
+    <div style={{ position: "absolute", left: 640, top: 1030, rotate: "-6deg", width: 300, backgroundColor: C.cream, padding: "22px 24px", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}>
+      <div style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: C.ink, margin: "0 auto 16px" }} />
+      <div style={mono(18, C.gray500)}>EOS PRICE</div>
+      <div style={{ ...headline(64, C.ink), marginTop: 6 }}>{now}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+        <span style={mono(18, C.ink)}>EGP</span>
+        <span style={{ ...mono(18, C.gray500), textDecoration: `line-through ${C.orange} 2px` }}>{`WAS ${was}`}</span>
+      </div>
+    </div>
+    <div style={{ position: "absolute", left: 92, right: 92, top: 1320 }}>
+      <div style={headline(80, C.cream)}>Built to repeat.</div>
+      <div style={{ ...mono(22, C.gray300), marginTop: 14 }}>100% COTTON · RELAXED FIT · END OF SEASON</div>
+    </div>
+    <LinkSlot color={C.cream} top={1540} label="[ SHOP — THECLOCAL.COM ]" />
+    <Grain2 opacity={0.1} />
+  </AbsoluteFill>
+);
