@@ -705,3 +705,57 @@ export const PriceB: React.FC<{ was: string; now: string }> = ({ was, now }) => 
     <Grain2 opacity={0.06} />
   </AbsoluteFill>
 );
+
+// Basic tee on the model, studio shot as-is; the light studio grey carries the whole story.
+export const PriceM: React.FC<{ was: string; now: string }> = ({ was, now }) => {
+  const W = 860;
+  const fade = "linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 84%, transparent 100%)";
+  return (
+    <AbsoluteFill style={{ background: "linear-gradient(90deg, #DEDDE3 0%, #E3E2E7 50%, #E5E4E9 100%)" }}>
+      <div style={{ position: "absolute", left: (1080 - W) / 2, top: 110, width: W, height: 1420, overflow: "hidden", WebkitMaskImage: fade, maskImage: fade, WebkitMaskComposite: "source-in", maskComposite: "intersect" }}>
+        <Img src={staticFile("basic/woman.jpg")} style={{ width: W, display: "block" }} />
+      </div>
+      <Corners color={`${C.ink}44`} len={110} />
+      <div style={{ position: "absolute", left: 92, right: 92, top: 250, display: "flex", justifyContent: "space-between" }}>
+        <span style={mono(20, C.gray500, { letterSpacing: "0.16em" })}>BASIC TEE</span>
+        <span style={mono(20, C.gray500, { letterSpacing: "0.16em" })}>BLACK / 01</span>
+      </div>
+
+      <div style={{ position: "absolute", left: 92, top: 1470 }}>
+        <div style={headline(58, C.ink)}>Built</div>
+        <div style={headline(58, C.ink)}>to repeat.</div>
+        <div style={{ ...mono(18, C.gray500, { lineHeight: 1.6 }), marginTop: 14 }}>{"100% COTTON · RELAXED FIT"}</div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 690,
+          top: 1440,
+          width: 290,
+          rotate: "-4deg",
+          backgroundColor: C.cream,
+          padding: "20px 24px 22px",
+          boxShadow: "0 16px 32px rgba(30,30,40,0.18)",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Monogram width={34} color={C.ink} />
+          <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#E2E1E6" }} />
+          <span style={mono(15, C.gray500)}>EOS</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 14 }}>
+          <span style={headline(66, C.ink)}>{now}</span>
+          <span style={mono(20, C.ink)}>EGP</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10, paddingTop: 10, borderTop: `1px dashed ${C.ink}66` }}>
+          <span style={mono(15, C.gray500)}>WAS</span>
+          <span style={{ position: "relative", ...mono(15, C.gray500) }}>
+            {`${was} EGP`}
+            <span style={{ position: "absolute", left: -3, right: -3, top: "50%", height: 2, backgroundColor: C.orange }} />
+          </span>
+        </div>
+      </div>
+      <LinkSlot color={C.ink} top={1700} label="[ SHOP — THECLOCAL.COM ]" />
+    </AbsoluteFill>
+  );
+};
