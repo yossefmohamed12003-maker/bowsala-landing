@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .head { position: absolute; left: 64px; right: 64px; top: 60px; }
+  .head .label { font-size: 20px; color: var(--gray-300); display: flex; align-items: center; gap: 12px; }
+  .head h1 { font-size: 92px; margin-top: 20px; }
+  .grid { position: absolute; left: 64px; top: 330px; width: 952px; display: grid; grid-template-columns: repeat(3, 304px); gap: 44px 20px; }
+  .cell { position: relative; }
+  .cell .photo { position: relative; width: 304px; height: 380px; }
+  .cell .label { font-size: 15px; color: var(--gray-300); margin-top: 10px; }
+  .cell .label i { font-style: normal; color: var(--orange); margin-right: 8px; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .foot .wm { width: 170px; color: var(--cream); margin-bottom: 6px; }
+  .foot .amt { font-family: "Satoshi"; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; text-align: right; line-height: 1; }
+  .foot .label { font-size: 16px; color: var(--gray-300); margin-top: 10px; text-align: right; }
+</style></head>
+<body>
+<div class="ad ink">
+  <div class="head">
+    <div class="label"><span class="dot"></span>Best seller — restocked</div>
+    <h1 class="display">One crewneck.<br>Every angle.</h1>
+  </div>
+  <div class="grid">
+    <div class="cell"><div class="photo" data-src="photos/p09_man_chain_fullbody.jpg" data-crop="0,0,1333"></div><div class="label"><i>01</i>Full look</div></div>
+    <div class="cell"><div class="photo" data-src="photos/p05_man_back_sky.jpg" data-crop="200,120,880"></div><div class="label"><i>02</i>Back</div></div>
+    <div class="cell"><div class="photo" data-src="photos/p02_woman_lowangle.jpg" data-crop="120,220,1100"></div><div class="label"><i>03</i>Front</div></div>
+    <div class="cell"><div class="photo" data-src="photos/p12_woman_corridor.jpg" data-crop="0,0,1333"></div><div class="label"><i>04</i>Full look</div></div>
+    <div class="cell"><div class="photo" data-src="photos/p13_back_vines.jpg" data-crop="200,420,900"></div><div class="label"><i>05</i>Dragon print</div></div>
+    <div class="cell"><div class="photo" data-src="photos/p04_woman_seated_front.jpg" data-crop="150,150,1100"></div><div class="label"><i>06</i>Front graphic</div></div>
+  </div>
+  <div class="foot">
+    <span class="wm"></span>
+    <div><div class="amt">EGP 850</div><div class="label">Black Dragon Crewneck · theclocal.com</div></div>
+  </div>
+</div>
+<script src="crop.js"></script>
+</body></html>

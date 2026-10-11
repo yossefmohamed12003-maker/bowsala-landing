@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .ph { left: 0; top: 0; width: 1080px; height: 940px; }
+  .band { position: absolute; left: 0; right: 0; top: 940px; bottom: 0; padding: 48px 64px 52px; display: flex; flex-direction: column; }
+  .band .label { font-size: 22px; color: var(--gray-300); display: flex; align-items: center; gap: 14px; }
+  .band h1 { font-size: 112px; margin-top: 26px; }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; }
+  .foot .wm { width: 200px; color: var(--cream); }
+  .price { text-align: right; }
+  .price .amt { font-family: "Satoshi"; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; }
+  .price .label { font-size: 18px; color: var(--gray-300); margin-top: 6px; justify-content: flex-end; }
+</style></head>
+<body>
+<div class="ad ink">
+  <div class="photo ph" data-src="photos/p11_back_closeup.jpg" data-crop="0,330,1333"></div>
+  <div class="band">
+    <div class="label"><span class="dot"></span>Restocked — Black Dragon Crewneck</div>
+    <h1 class="display">The Black Dragon<br>is back.</h1>
+    <div class="foot">
+      <span class="wm"></span>
+      <div class="price"><div class="amt">EGP 850</div><div class="label">theclocal.com</div></div>
+    </div>
+  </div>
+</div>
+<script src="crop.js"></script>
+</body></html>

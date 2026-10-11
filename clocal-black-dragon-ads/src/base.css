@@ -1,0 +1,60 @@
+/* CLOCAL — Black Dragon Crewneck restock. Tokens from the CLOCAL Brand Book Vol. 01 */
+@font-face { font-family: "Satoshi"; font-weight: 900; src: url(fonts/Satoshi-Black.woff) format("woff"); }
+@font-face { font-family: "Satoshi"; font-weight: 700; src: url(fonts/Satoshi-Bold.woff) format("woff"); }
+@font-face { font-family: "Satoshi"; font-weight: 500; src: url(fonts/Satoshi-Medium.woff) format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url(fonts/inter-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 400; src: url(fonts/Geist-Regular.woff2) format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 500; src: url(fonts/Geist-Medium.woff2) format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 600; src: url(fonts/Geist-SemiBold.woff2) format("woff2"); }
+
+:root {
+  --cream: #F6EEE3;
+  --cream-tint: #FBF6EF;
+  --cream-deep: #EFE5D6;
+  --hairline: #E2D7C6;
+  --hairline-strong: #CBBEAA;
+  --gray-300: #A69F92;
+  --gray-500: #6B675F;
+  --gray-700: #3A3A38;
+  --gray-900: #141414;
+  --ink: #0A0A0A;
+  --blue: #2B00FF;
+  --orange: #FF4200;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--ink); }
+.ad { position: relative; overflow: hidden; width: 1080px; height: 1350px; }
+.ad.sq { height: 1080px; }
+.ad.story { height: 1920px; }
+
+.cream { background: var(--cream); color: var(--ink); }
+.ink { background: var(--ink); color: var(--cream); }
+
+/* Satoshi display: Black 900, tight tracking, sentence case */
+.display { font-family: "Satoshi"; font-weight: 900; letter-spacing: -0.02em; line-height: 0.92; }
+.heading { font-family: "Satoshi"; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.body { font-family: "Inter"; font-weight: 400; line-height: 1.35; }
+/* Geist technical labels: always UPPERCASE, +0.16em */
+.label { font-family: "Geist"; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; line-height: 1.3; }
+
+.blue { color: var(--blue); }
+.orange { color: var(--orange); }
+
+/* Wordmark / monogram from the brand-book vector, coloured via currentColor */
+.wm { display: block; background: currentColor; aspect-ratio: 4.4075;
+  -webkit-mask: url(logo/clocal-wordmark.svg) no-repeat center / contain;
+          mask: url(logo/clocal-wordmark.svg) no-repeat center / contain; }
+.mono { display: block; background: currentColor; aspect-ratio: 1.2076;
+  -webkit-mask: url(logo/clocal-monogram.svg) no-repeat center / contain;
+          mask: url(logo/clocal-monogram.svg) no-repeat center / contain; }
+
+.photo { position: absolute; overflow: hidden; }
+.photo img { position: absolute; display: block; }
+
+.rule { height: 1px; background: currentColor; opacity: .25; }
+.btn { display: inline-flex; align-items: center; gap: 18px; font-family: "Inter"; font-weight: 600;
+  font-size: 34px; letter-spacing: -0.01em; padding: 26px 40px; background: var(--blue); color: var(--cream); }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--orange); }
