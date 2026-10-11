@@ -32,6 +32,15 @@ No discounts, scarcity, statistics, or testimonials.
 | 07 | `ad07-still-the-favourite_4x5` | Best seller (lifestyle) | Two people wearing it together, warm and human; dragon prints on both backs | Tests an emotional/lifestyle hook, with a woman in frame | `p06_duo_backs_rooftop` | BEST SELLER · "Still the favourite." | "Back in stock — EGP 850 · theclocal.com" |
 | 08 | `ad08-every-angle_4x5` | Experimental contact sheet | Six frames numbered like a lookbook contact sheet; men's and women's fit | Tests a multi-angle catalogue format (VOID/MURR insight), styled as CLOCAL | `p09`, `p05`, `p02`, `p12`, `p13`, `p04` | BEST SELLER — RESTOCKED · "One crewneck. Every angle." | EGP 850 + theclocal.com |
 
+## Teaser story (9:16, 3 frames, post before the restock goes live)
+| Frame | File | Idea | Photo | Copy |
+|---|---|---|---|---|
+| 1 | `teaser-01-coming-back_9x16` | A narrow window shows only part of the dragon | `p11` crop | CLOCAL — RESTOCK · "Something's coming back." |
+| 2 | `teaser-02-you-know-the-one_9x16` | A wider view, still incomplete; speaks to existing fans | `p11` crop | "You know the one." |
+| 3 | `teaser-03-back-soon_9x16` | Reveal: the full back print and the product name | `p05_man_back_sky` | BEST SELLER — RESTOCK · "The Black Dragon. Back soon." · theclocal.com |
+
+No date and no price, so nothing is invented. If there's a confirmed launch date, it can replace "Back soon."
+
 **Placements:** 4:5 for Feed (FB/IG). 9:16 for Stories/Reels: key copy stays out of the top ~250 px and bottom ~380 px.
 1:1 for Feed and right column.
 
