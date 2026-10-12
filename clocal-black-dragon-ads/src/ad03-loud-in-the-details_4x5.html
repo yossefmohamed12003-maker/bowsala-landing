@@ -1,7 +1,8 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
 <style>
-  h1 { position: absolute; left: 64px; top: 64px; font-size: 96px; }
+  h1 { position: absolute; left: 64px; top: 70px; font-size: 84px; }
+  .topwm { position: absolute; right: 64px; top: 92px; width: 140px; color: var(--cream); }
   .tile { position: absolute; }
   .t1 { left: 64px; top: 200px; width: 952px; height: 560px; }
   .t2 { left: 64px; top: 820px; width: 464px; height: 330px; }
@@ -11,11 +12,12 @@
   .foot { position: absolute; left: 64px; right: 64px; bottom: 52px; display: flex; justify-content: space-between; align-items: flex-end; }
   .foot .body { font-size: 26px; color: var(--cream); }
   .foot .body b { font-family: "Satoshi"; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; display: block; margin-top: 4px; }
-  .foot .wm { width: 180px; color: var(--cream); margin-bottom: 8px; }
+  .foot .btn { margin-bottom: 4px; }
 </style></head>
 <body>
 <div class="ad ink">
   <h1 class="display">Loud in the details.</h1>
+  <span class="wm topwm"></span>
   <div class="photo tile t1" data-src="photos/p11_back_closeup.jpg" data-crop="300,700,800"></div>
   <div class="label cap c1"><span class="dot"></span>01 — Dragon back print</div>
   <div class="photo tile t2" data-src="photos/p08_man_vines_front.jpg" data-crop="280,640,760"></div>
@@ -23,8 +25,8 @@
   <div class="photo tile t3" data-src="photos/p03_man_sky_front.jpg" data-crop="600,610,480"></div>
   <div class="label cap c3"><span class="dot"></span>03 — Arabic chest mark</div>
   <div class="foot">
-    <div class="body">Black Dragon Crewneck — back in stock<b>EGP 850</b></div>
-    <span class="wm"></span>
+    <div class="body">Black Dragon Crewneck — restock pre-order<b>EGP 850</b></div>
+    <span class="btn sm">Pre-order now →</span>
   </div>
 </div>
 <script src="crop.js"></script>

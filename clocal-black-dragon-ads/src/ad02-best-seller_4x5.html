@@ -2,24 +2,25 @@
 <html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
 <style>
   .top { position: absolute; left: 64px; right: 64px; top: 60px; }
-  .top .label { font-size: 22px; color: var(--gray-500); display: flex; justify-content: space-between; }
+  .top .label { font-size: 22px; color: var(--gray-500); display: flex; justify-content: space-between; align-items: center; }
+  .top .wm { width: 150px; color: var(--blue); }
   .top h1 { font-size: 104px; margin-top: 28px; }
   .ph { left: 64px; top: 372px; width: 952px; height: 796px; }
   .foot { position: absolute; left: 64px; right: 64px; bottom: 56px; display: flex; justify-content: space-between; align-items: flex-end; }
   .foot .name { font-family: "Inter"; font-weight: 500; font-size: 28px; }
   .foot .amt { font-family: "Satoshi"; font-weight: 900; font-size: 64px; letter-spacing: -0.02em; line-height: 1; margin-top: 6px; }
-  .foot .wm { width: 210px; color: var(--blue); margin-bottom: 6px; }
+  
 </style></head>
 <body>
 <div class="ad cream">
   <div class="top">
-    <div class="label"><span>Best seller</span><span>Restocked</span></div>
+    <div class="label"><span>Best seller — restock pre-order</span><span class="wm"></span></div>
     <h1 class="display">A clocal best seller.<br><span class="blue">Back again.</span></h1>
   </div>
   <div class="photo ph" data-src="photos/p14_man_pillar_front.jpg" data-crop="0,290,1333"></div>
   <div class="foot">
     <div><div class="name">Black Dragon Crewneck</div><div class="amt">EGP 850</div></div>
-    <span class="wm"></span>
+    <span class="btn">Pre-order now →</span>
   </div>
 </div>
 <script src="crop.js"></script>
