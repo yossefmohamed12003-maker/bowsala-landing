@@ -1,8 +1,8 @@
 """Black Dragon Crewneck flat mockups (front and back) built from the reference flat-lay.
 
-VIEW=front (default) or VIEW=back.  Back view: the reference is a front flat-lay, so the neck
-opening (inner back neck + front rib) is closed with body fabric, the garment is mirrored, and
-the supplied back dragon artwork is placed centred under the collar as on the real garment.
+VIEW=front (default) or VIEW=back.  Back view uses the back flat-lay reference: its embroidery and
+the back yoke seam (not on the real garment) are removed, and the supplied back dragon artwork is
+placed centred under the collar as on the real garment.
 
 Recolours the reference garment to black while keeping its own folds/shading,
 removes the reference brand's chest embroidery and neck tag, then places the
@@ -19,7 +19,7 @@ from PIL import Image
 A = 'assets/'
 K = 2                              # work at 2x the reference resolution
 VIEW = os.environ.get('VIEW', 'front')
-BACK_W, BACK_TOP = 320, 580        # back print width / top edge (reference px)
+BACK_W, BACK_TOP = 320, 560        # back print width / top edge (reference px)
 # Placement (reference px, 1280x1920). Tunable from the command line for iteration.
 ART_SCALE = float(sys.argv[1]) if len(sys.argv) > 1 else 1.45   # px per unit of an 800-unit artwork
 ART_X = float(sys.argv[2]) if len(sys.argv) > 2 else -391        # artwork origin
@@ -28,7 +28,7 @@ SEAM_X = 292                       # left side seam: front print stops here
 COLLAR_Y, HEM_Y = 590, 1338        # print area between collar rib and hem rib
 AR_CX, AR_CY, AR_W = 794, 848, 150  # Arabic chest mark centre / width
 
-ref0 = np.array(Image.open(A + 'ref_crewneck_flat.webp').convert('RGB'))
+ref0 = np.array(Image.open(A + ('ref_crewneck_flat_back.webp' if VIEW == 'back' else 'ref_crewneck_flat.webp')).convert('RGB'))
 # Remove WebP block artefacts before upscaling, keeping folds and seams (edge-preserving).
 ref0 = cv2.bilateralFilter(ref0, 7, 10, 5)
 ref = cv2.resize(ref0, None, fx=K, fy=K, interpolation=cv2.INTER_CUBIC).astype(np.float32)
@@ -46,23 +46,32 @@ ff = mask.copy(); h2 = np.zeros((H + 2, W + 2), np.uint8)
 cv2.floodFill(ff, h2, (0, 0), 1)
 mask = mask | (1 - ff)                                  # fill interior holes
 
-# Remove the reference brand: chest embroidery (bright, low chroma) and the whole neck tag.
-fix = np.zeros((H, W), np.uint8)
-fix[712 * K:768 * K, 736 * K:836 * K] = 1                               # chest embroidery: whole patch
-tag = np.zeros((H, W), np.uint8)
-tag[466 * K:510 * K, 606 * K:678 * K] = 1                               # reference brand's woven neck label
+# Remove the reference brand (and, on the back, the yoke seam the real garment doesn't have).
 src = ref.clip(0, 255).astype(np.uint8)
+fix = np.zeros((H, W), np.uint8)
+if VIEW == 'front':
+    fix[712 * K:768 * K, 736 * K:836 * K] = 1                               # chest embroidery: whole patch
+    fix[466 * K:510 * K, 606 * K:678 * K] = 1                               # woven neck label
+else:
+    yoke = np.array([(332, 699), (380, 691), (460, 685), (620, 684), (740, 688), (820, 692),
+                     (900, 701), (945, 707), (968, 712)]) * K                # traced from the reference
+    cv2.polylines(fix, [yoke.astype(np.int32)], False, 1, 13 * K)           # back yoke seam
+clean = cv2.inpaint(src, (fix * 255).astype(np.uint8), 9 * K, cv2.INPAINT_TELEA).astype(np.float32)
 if VIEW == 'back':
-    # Close the neck opening: from the back only the collar band shows, body fabric below it.
-    neck = np.array([(498, 444), (532, 452), (560, 458), (600, 463), (640, 466), (680, 463), (720, 457),
-                     (748, 450), (784, 442), (796, 502), (752, 528), (720, 542), (680, 557), (640, 563),
-                     (600, 557), (560, 542), (528, 528), (486, 502)])
-    nm = np.zeros((H, W), np.uint8)
-    cv2.fillPoly(nm, [(neck * K).astype(np.int32)], 1)
-    fix |= cv2.dilate(nm, np.ones((5, 5), np.uint8))
-clean = cv2.inpaint(src, ((fix | tag) * 255).astype(np.uint8), 9 * K, cv2.INPAINT_TELEA).astype(np.float32)
-if VIEW == 'back':
-    clean, mask = clean[:, ::-1].copy(), mask[:, ::-1].copy()   # back of a flat-lay is the mirror image
+    # Back embroidery (incl. its emboss): fill with a smooth field from the surrounding fabric
+    # (normalised convolution) and feather it in, so no inpainting streaks appear.
+    hole = np.zeros((H, W), np.float32); hole[738 * K:968 * K, 432 * K:832 * K] = 1
+    keep = (1 - hole) * mask
+    # computed at 1/8 scale: the hole is large, so the field needs a wide radius to reach its centre
+    q = 8
+    small = lambda im: cv2.resize(im, (W // q, H // q), interpolation=cv2.INTER_AREA)
+    big = lambda im: cv2.resize(im, (W, H), interpolation=cv2.INTER_CUBIC)
+    sig = 90 * K / q
+    den = cv2.GaussianBlur(small(keep), (0, 0), sig)
+    feather = cv2.GaussianBlur(hole, (0, 0), 6 * K)
+    for c in range(3):
+        fill = big(cv2.GaussianBlur(small(clean[..., c] * keep), (0, 0), sig) / np.maximum(den, 1e-3))
+        clean[..., c] = clean[..., c] * (1 - feather) + fill * feather
 Lc = 0.299 * clean[..., 0] + 0.587 * clean[..., 1] + 0.114 * clean[..., 2]
 Lc = cv2.bilateralFilter(Lc.astype(np.float32), 9, 4, 6)   # smooth fabric, keep seams
 
