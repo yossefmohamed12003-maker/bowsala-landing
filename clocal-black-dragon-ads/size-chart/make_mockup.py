@@ -19,7 +19,7 @@ from PIL import Image
 A = 'assets/'
 K = 2                              # work at 2x the reference resolution
 VIEW = os.environ.get('VIEW', 'front')
-BACK_W, BACK_TOP = 320, 560        # back print width / top edge (reference px)
+BACK_W, BACK_TOP = 260, 560        # back print width / top edge (reference px)
 # Placement (reference px, 1280x1920). Tunable from the command line for iteration.
 ART_SCALE = float(sys.argv[1]) if len(sys.argv) > 1 else 1.45   # px per unit of an 800-unit artwork
 ART_X = float(sys.argv[2]) if len(sys.argv) > 2 else -391        # artwork origin
