@@ -59,3 +59,7 @@ html, body { background: var(--ink); }
   font-size: 34px; letter-spacing: -0.01em; padding: 26px 40px; background: var(--blue); color: var(--cream); }
 .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--orange); }
 .btn.sm { font-size: 24px; padding: 16px 24px; gap: 12px; }
+@font-face { font-family: "Geist Mono"; font-weight: 400; src: url(fonts/GeistMono-Regular.woff2) format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 500; src: url(fonts/GeistMono-Medium.woff2) format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 600; src: url(fonts/GeistMono-SemiBold.woff2) format("woff2"); }
+.mono-label { font-family: "Geist Mono"; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; }
