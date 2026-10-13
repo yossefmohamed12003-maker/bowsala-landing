@@ -1,11 +1,16 @@
-"""Black Dragon Crewneck flat mockup (front) built from the reference flat-lay.
+"""Black Dragon Crewneck flat mockups (front and back) built from the reference flat-lay.
+
+VIEW=front (default) or VIEW=back.  Back view: the reference is a front flat-lay, so the neck
+opening (inner back neck + front rib) is closed with body fabric, the garment is mirrored, and
+the supplied back dragon artwork is placed centred under the collar as on the real garment.
 
 Recolours the reference garment to black while keeping its own folds/shading,
 removes the reference brand's chest embroidery and neck tag, then places the
 supplied CLOCAL front artwork and Arabic chest mark where they sit on the real
 garment (artwork clipped at the left side seam, Arabic mark on the wearer's left chest).
-Output: assets/mockup_front.png (RGBA cut-out).
+Output: assets/mockup_<view>.png (RGBA cut-out).
 """
+import os
 import sys
 import cv2
 import numpy as np
@@ -13,6 +18,8 @@ from PIL import Image
 
 A = 'assets/'
 K = 2                              # work at 2x the reference resolution
+VIEW = os.environ.get('VIEW', 'front')
+BACK_W, BACK_TOP = 320, 580        # back print width / top edge (reference px)
 # Placement (reference px, 1280x1920). Tunable from the command line for iteration.
 ART_SCALE = float(sys.argv[1]) if len(sys.argv) > 1 else 1.45   # px per unit of an 800-unit artwork
 ART_X = float(sys.argv[2]) if len(sys.argv) > 2 else -391        # artwork origin
@@ -45,7 +52,17 @@ fix[712 * K:768 * K, 736 * K:836 * K] = 1                               # chest 
 tag = np.zeros((H, W), np.uint8)
 tag[466 * K:510 * K, 606 * K:678 * K] = 1                               # reference brand's woven neck label
 src = ref.clip(0, 255).astype(np.uint8)
+if VIEW == 'back':
+    # Close the neck opening: from the back only the collar band shows, body fabric below it.
+    neck = np.array([(498, 444), (532, 452), (560, 458), (600, 463), (640, 466), (680, 463), (720, 457),
+                     (748, 450), (784, 442), (796, 502), (752, 528), (720, 542), (680, 557), (640, 563),
+                     (600, 557), (560, 542), (528, 528), (486, 502)])
+    nm = np.zeros((H, W), np.uint8)
+    cv2.fillPoly(nm, [(neck * K).astype(np.int32)], 1)
+    fix |= cv2.dilate(nm, np.ones((5, 5), np.uint8))
 clean = cv2.inpaint(src, ((fix | tag) * 255).astype(np.uint8), 9 * K, cv2.INPAINT_TELEA).astype(np.float32)
+if VIEW == 'back':
+    clean, mask = clean[:, ::-1].copy(), mask[:, ::-1].copy()   # back of a flat-lay is the mirror image
 Lc = 0.299 * clean[..., 0] + 0.587 * clean[..., 1] + 0.114 * clean[..., 2]
 Lc = cv2.bilateralFilter(Lc.astype(np.float32), 9, 4, 6)   # smooth fabric, keep seams
 
@@ -61,39 +78,53 @@ fabric = fabric + grain                                  # faint fleece grain so
 out = np.dstack([fabric * 1.0, fabric * 1.0, fabric * 1.02])
 
 # Front artwork (white), clipped to the front panel: right of the side seam, collar→hem.
-art = Image.open(A + 'print_front.png').convert('RGBA')
-size = int(round(800 * ART_SCALE * K))
-art = np.array(art.resize((size, size), Image.LANCZOS)).astype(np.float32) / 255.0
-layer = np.zeros((H, W), np.float32)
-x0, y0 = int(round(ART_X * K)), int(round(ART_Y * K))
-xs, ys = max(0, x0), max(0, y0)
-xe, ye = min(W, x0 + size), min(H, y0 + size)
-layer[ys:ye, xs:xe] = art[ys - y0:ye - y0, xs - x0:xe - x0, 3]
-clip = np.zeros((H, W), np.float32)
-clip[COLLAR_Y * K:HEM_Y * K, SEAM_X * K:] = 1
-clip *= mask
-layer *= clip
-ink = 236.0 * np.clip(shade, 0.82, 1.06) + grain * 1.5  # print follows the fabric folds and grain
-for c in range(3):
-    out[..., c] = out[..., c] * (1 - layer) + ink * layer
+if VIEW == 'front':
+    art = Image.open(A + 'print_front.png').convert('RGBA')
+    size = int(round(800 * ART_SCALE * K))
+    art = np.array(art.resize((size, size), Image.LANCZOS)).astype(np.float32) / 255.0
+    layer = np.zeros((H, W), np.float32)
+    x0, y0 = int(round(ART_X * K)), int(round(ART_Y * K))
+    xs, ys = max(0, x0), max(0, y0)
+    xe, ye = min(W, x0 + size), min(H, y0 + size)
+    layer[ys:ye, xs:xe] = art[ys - y0:ye - y0, xs - x0:xe - x0, 3]
+    clip = np.zeros((H, W), np.float32)
+    clip[COLLAR_Y * K:HEM_Y * K, SEAM_X * K:] = 1
+    clip *= mask
+    layer *= clip
+    ink = 236.0 * np.clip(shade, 0.82, 1.06) + grain * 1.5  # print follows the fabric folds and grain
+    for c in range(3):
+        out[..., c] = out[..., c] * (1 - layer) + ink * layer
 
-# Arabic chest mark (grey, as supplied).
-ar = Image.open(A + 'print_arabic_chest.png').convert('RGBA')
-ar = ar.crop(ar.getbbox())
-arw = AR_W * K
-arh = int(round(arw * ar.height / ar.width))
-ar = np.array(ar.resize((arw, arh), Image.LANCZOS)).astype(np.float32) / 255.0
-ax, ay = AR_CX * K - arw // 2, AR_CY * K - arh // 2
-a = ar[..., 3] * mask[ay:ay + arh, ax:ax + arw]
-for c in range(3):
-    region = out[ay:ay + arh, ax:ax + arw, c]
-    col = ar[..., c] * 255.0 * np.clip(shade[ay:ay + arh, ax:ax + arw], 0.85, 1.05)
-    out[ay:ay + arh, ax:ax + arw, c] = region * (1 - a) + col * a
+    # Arabic chest mark (grey, as supplied).
+    ar = Image.open(A + 'print_arabic_chest.png').convert('RGBA')
+    ar = ar.crop(ar.getbbox())
+    arw = AR_W * K
+    arh = int(round(arw * ar.height / ar.width))
+    ar = np.array(ar.resize((arw, arh), Image.LANCZOS)).astype(np.float32) / 255.0
+    ax, ay = AR_CX * K - arw // 2, AR_CY * K - arh // 2
+    a = ar[..., 3] * mask[ay:ay + arh, ax:ax + arw]
+    for c in range(3):
+        region = out[ay:ay + arh, ax:ax + arw, c]
+        col = ar[..., c] * 255.0 * np.clip(shade[ay:ay + arh, ax:ax + arw], 0.85, 1.05)
+        out[ay:ay + arh, ax:ax + arw, c] = region * (1 - a) + col * a
+
+else:
+    # Back dragon artwork (white), centred under the collar.
+    bk = Image.open(A + 'print_back_dragon.png').convert('RGBA')
+    bk = bk.crop(bk.getbbox())
+    bw = BACK_W * K
+    bh = int(round(bw * bk.height / bk.width))
+    bk = np.array(bk.resize((bw, bh), Image.LANCZOS)).astype(np.float32) / 255.0
+    bx, by = W // 2 - bw // 2, BACK_TOP * K
+    a = bk[..., 3] * mask[by:by + bh, bx:bx + bw]
+    ink = 236.0 * np.clip(shade[by:by + bh, bx:bx + bw], 0.82, 1.06) + grain[by:by + bh, bx:bx + bw] * 1.5
+    for c in range(3):
+        out[by:by + bh, bx:bx + bw, c] = out[by:by + bh, bx:bx + bw, c] * (1 - a) + ink * a
 
 # Soft-edged cut-out.
 core = cv2.erode(mask, np.ones((3, 3), np.uint8))
 alpha = cv2.GaussianBlur(core.astype(np.float32), (0, 0), 1.2)   # clean, slightly softened edge
 rgba = np.dstack([out.clip(0, 255), alpha * 255]).astype(np.uint8)
 ys_, xs_ = np.where(mask > 0)
-Image.fromarray(rgba).crop((xs_.min() - 8, ys_.min() - 8, xs_.max() + 9, ys_.max() + 9)).save(A + 'mockup_front.png')
+Image.fromarray(rgba).crop((xs_.min() - 8, ys_.min() - 8, xs_.max() + 9, ys_.max() + 9)).save(A + f'mockup_{VIEW}.png')
 print('mockup bbox', xs_.min(), ys_.min(), xs_.max(), ys_.max())
