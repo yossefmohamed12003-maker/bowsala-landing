@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 A = 'assets/'
-K = 2                              # work at 2x the reference resolution
+K = int(os.environ.get('K', 2))     # work at Kx the reference resolution (K=3 for HQ export)
 VIEW = os.environ.get('VIEW', 'front')
 BACK_W, BACK_TOP = 260, 560        # back print width / top edge (reference px)
 # Placement (reference px, 1280x1920). Tunable from the command line for iteration.
@@ -135,5 +135,5 @@ core = cv2.erode(mask, np.ones((3, 3), np.uint8))
 alpha = cv2.GaussianBlur(core.astype(np.float32), (0, 0), 1.2)   # clean, slightly softened edge
 rgba = np.dstack([out.clip(0, 255), alpha * 255]).astype(np.uint8)
 ys_, xs_ = np.where(mask > 0)
-Image.fromarray(rgba).crop((xs_.min() - 8, ys_.min() - 8, xs_.max() + 9, ys_.max() + 9)).save(A + f'mockup_{VIEW}.png')
+Image.fromarray(rgba).crop((xs_.min() - 8, ys_.min() - 8, xs_.max() + 9, ys_.max() + 9)).save(A + f'mockup_{VIEW}' + ('' if K == 2 else f'@{K}x') + '.png')
 print('mockup bbox', xs_.min(), ys_.min(), xs_.max(), ys_.max())
