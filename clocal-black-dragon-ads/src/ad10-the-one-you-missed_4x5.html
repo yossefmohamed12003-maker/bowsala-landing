@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Same ad set as AD06, different structure: cream text column left, tall photo right */
+  .ph { left: 432px; top: 0; width: 648px; height: 1350px; }
+  .col { position: absolute; left: 56px; top: 64px; bottom: 56px; width: 340px; display: flex; flex-direction: column; }
+  .col .tag { align-self: flex-start; font-size: 18px; color: var(--cream); background: var(--blue); padding: 9px 14px 8px; }
+  .col h1 { font-size: 104px; margin-top: 30px; }
+  .col h1 span { color: var(--blue); }
+  .col .name { font-family: "Satoshi"; font-weight: 900; font-size: 38px; letter-spacing: -0.02em; line-height: 1; margin-top: auto; }
+  .col .btn { margin-top: 28px; align-self: flex-start; font-size: 28px; padding: 22px 30px; }
+  .col .site { font-size: 15px; color: var(--gray-500); margin-top: 14px; }
+</style></head>
+<body>
+<div class="ad cream">
+  <div class="photo ph" data-src="photos/p18_man_lookaway_rooftop.jpg" data-crop="300,0,1236"></div>
+  <div class="col">
+    <span class="label tag">Best seller restock</span>
+    <h1 class="display">The one<br>you<br>missed<br><span>is back.</span></h1>
+    <div class="name">Black Dragon<br>Crewneck</div>
+    <span class="btn">Pre-order now →</span>
+    <span class="label site">theclocal.com</span>
+  </div>
+</div>
+<script src="crop.js"></script>
+</body></html>
