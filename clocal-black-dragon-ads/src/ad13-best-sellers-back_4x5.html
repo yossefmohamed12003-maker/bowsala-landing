@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Ref: "Not your usual jacket" — oversized headline behind the model's head, detail crops strip, footer CTA */
+  .ad { background: #E9EBEE; }
+  .ph, .cut { left: 0; top: 0; width: 1080px; height: 1000px; }
+  .wm { position: absolute; left: 56px; top: 46px; width: 140px; color: var(--blue); }
+  .big { position: absolute; left: 0; right: 0; top: 104px; text-align: center; font-family: "Satoshi"; font-weight: 900; font-size: 132px;
+         line-height: .86; letter-spacing: -.045em; text-transform: uppercase; color: var(--ink); }
+  .big .l2 { display: flex; justify-content: space-between; padding: 0 44px; }
+  .side { position: absolute; right: 56px; top: 520px; text-align: right; font-size: 18px; color: var(--ink); }
+  .side i { display: block; width: 46px; height: 2px; background: var(--ink); margin: 14px 0 0 auto; }
+  .tile { position: absolute; top: 1018px; width: 476px; height: 214px; }
+  .t1 { left: 56px; } .t2 { left: 548px; }
+  .tl { position: absolute; top: 1190px; font-size: 14px; color: var(--cream); background: var(--ink); padding: 6px 10px; }
+  .l1 { left: 68px; } .l2 { left: 560px; }
+  .foot { position: absolute; left: 56px; right: 56px; top: 1262px; display: flex; justify-content: space-between; align-items: center; }
+  .foot .btn { background: var(--ink); font-size: 24px; padding: 16px 26px; text-transform: uppercase; letter-spacing: .12em; font-family: "Geist"; font-weight: 500; }
+  .foot .label { font-size: 18px; color: var(--ink); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p17_man_front_rooftop.jpg" data-crop="0,300,1717"></div>
+  <div class="big">Best seller.<div class="l2"><span class="a">Back</span><span class="b">again.</span></div></div>
+  <div class="photo cut" data-src="photos/p17_cutout_top.png" data-crop="0,300,1717"></div>
+  <span class="wm"></span>
+  <div class="label side">Restock<br>pre-order<i></i></div>
+  <div class="photo tile t1" data-src="photos/p17_man_front_rooftop.jpg" data-crop="530,1330,480"></div>
+  <div class="photo tile t2" data-src="photos/p17_man_front_rooftop.jpg" data-crop="870,1328,400"></div>
+  <span class="label tl l1">Silk-screen print</span>
+  <span class="label tl l2">Puff-print logo</span>
+  <div class="foot"><span class="btn">Pre-order now →</span><span class="label">theclocal.com</span></div>
+</div>
+<script src="crop.js"></script>
+</body></html>

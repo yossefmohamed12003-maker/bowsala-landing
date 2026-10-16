@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Ref: "It's all in the details" — model left, headline + labelled detail crops right, ink footer */
+  .ad { background: #EEF0F2; }
+  .ph { left: 0; top: 0; width: 560px; height: 1130px; }
+  h1 { position: absolute; left: 600px; right: 40px; top: 56px; font-family: "Satoshi"; font-weight: 900; font-size: 78px; line-height: .9;
+       letter-spacing: -.04em; text-transform: uppercase; color: var(--ink); }
+  .tile { position: absolute; left: 600px; width: 440px; height: 360px; }
+  .t1 { top: 268px; } .t2 { top: 690px; }
+  .tl { position: absolute; left: 600px; font-size: 18px; color: var(--ink); }
+  .l1 { top: 642px; } .l2 { top: 1064px; }
+  .foot { position: absolute; left: 0; right: 0; top: 1130px; bottom: 0; background: var(--ink); display: flex; align-items: center; padding: 0 56px; gap: 40px; }
+  .foot .brand { color: var(--cream); }
+  .foot .brand .wm { width: 230px; }
+  .foot .brand .label { font-size: 15px; color: var(--gray-300); margin-top: 12px; }
+  .foot .sep { width: 1px; height: 120px; background: var(--gray-700); }
+  .foot .cta { margin-left: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .foot .btn { background: var(--cream); color: var(--ink); font-size: 30px; padding: 20px 34px; border-radius: 999px; }
+  .foot .cta .label { font-size: 16px; color: var(--gray-300); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p18_man_lookaway_rooftop.jpg" data-crop="330,270,1140"></div>
+  <h1>Loud in<br>the details.</h1>
+  <div class="photo tile t1" data-src="photos/carousel/c1.jpg" data-crop="100,430,720"></div>
+  <span class="label tl l1">Dragon back print</span>
+  <div class="photo tile t2" data-src="photos/carousel/c6.jpg" data-crop="250,470,560"></div>
+  <span class="label tl l2">Puff-print chest logo</span>
+  <div class="foot">
+    <div class="brand"><span class="wm"></span><div class="label">Best seller restock</div></div>
+    <span class="sep"></span>
+    <div class="cta"><span class="btn">Pre-order now →</span><span class="label">theclocal.com</span></div>
+  </div>
+</div>
+<script src="crop.js"></script>
+</body></html>
