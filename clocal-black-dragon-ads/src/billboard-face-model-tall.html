@@ -1,0 +1,20 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Model-hero tall face: full-bleed photo, crewneck centred, name small top, logo bottom */
+  .ad { width: 1000px; height: 2780px; background: var(--ink); color: var(--cream); }
+  .ph { position: absolute; left: 0; top: 0; width: 1000px; height: 2780px; }
+  .k { position: absolute; left: 0; right: 0; top: 120px; text-align: center; font-family: "Satoshi"; font-weight: 900; font-size: 150px; line-height: .9; letter-spacing: -.04em; text-transform: uppercase; color: var(--ink); }
+  .k span { color: var(--blue); }
+  .bot { position: absolute; left: 0; right: 0; bottom: 0; height: 300px; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; }
+  .bot .wm { width: 260px; color: var(--cream); }
+  .bot .label { font-size: 28px; color: var(--gray-300); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p17_man_front_rooftop.jpg" data-crop="420,110,880"></div>
+  <div class="k">Black<br><span>Dragon.</span></div>
+  <div class="bot"><span class="wm"></span><span class="label">Crewneck · pre-order now · theclocal.com</span></div>
+</div>
+<script src="crop.js"></script>
+</body></html>
