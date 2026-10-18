@@ -1,0 +1,20 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Vertical building-wrap face (1:2). Hook stacked over the real back-print photo */
+  .ad { width: 1000px; height: 2176px; background: var(--ink); color: var(--cream); }
+  .ph { position: absolute; left: 0; top: 540px; width: 1000px; height: 1636px; }
+  .k { position: absolute; left: 0; right: 0; top: 90px; text-align: center; font-family: "Satoshi"; font-weight: 900; font-size: 150px; line-height: .88; letter-spacing: -.045em; text-transform: uppercase; }
+  .k span { color: #6B55FF; }
+  .cta { position: absolute; left: 0; right: 0; bottom: 90px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .cta .btn { font-size: 54px; padding: 32px 60px; }
+  .cta .wm { width: 230px; color: var(--cream); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p05_man_back_sky.jpg" data-crop="190,0,1010"></div>
+  <div class="k">It came<br>back<br><span>for you.</span></div>
+  <div class="cta"><span class="btn">Pre-order now</span><span class="wm"></span></div>
+</div>
+<script src="crop.js"></script>
+</body></html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Wide gantry face (2:1). Ref: "70% crossed the line" — photo, one bold band across, question underneath */
+  .ad { width: 2400px; height: 775px; background: var(--cream); color: var(--ink); }
+  .ph { position: absolute; left: 0; top: 0; width: 2400px; height: 775px; }
+  .band { position: absolute; left: 0; right: 0; top: 40px; height: 170px; background: var(--blue); display: flex; align-items: center; justify-content: center; }
+  .band h1 { font-family: "Satoshi"; font-weight: 900; font-size: 136px; letter-spacing: -.04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
+  .q { position: absolute; left: 0; right: 0; top: 232px; text-align: center; font-family: "Satoshi"; font-weight: 900; font-size: 60px; letter-spacing: -.02em; text-transform: uppercase; color: var(--cream); text-shadow: 0 2px 16px rgba(0,0,0,.5); }
+  .foot { position: absolute; left: 0; right: 0; bottom: 0; height: 100px; padding: 0 60px; background: var(--ink); display: flex; justify-content: space-between; align-items: center; color: var(--cream); }
+  .foot .wm { width: 220px; color: var(--cream); }
+  .foot .label { font-size: 30px; }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p06_duo_backs_rooftop.jpg" data-crop="0,560,1333"></div>
+  <div class="band"><h1>The best seller is back</h1></div>
+  <div class="q">Missed it last time?</div>
+  <div class="foot"><span class="wm"></span><span class="label">Black Dragon Crewneck · pre-order now · theclocal.com</span></div>
+</div>
+<script src="crop.js"></script>
+</body></html>
