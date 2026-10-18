@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Ref: ZOHO spec story — flat garment bleeding off the left edge, hairline callouts on the right, name at the bottom */
+  .ad { background: var(--cream); color: var(--ink); }
+  .mk { position: absolute; left: -300px; top: 400px; width: 1000px; }
+  .wm { position: absolute; left: 50%; transform: translateX(-50%); top: 230px; width: 170px; color: var(--blue); }
+  svg { position: absolute; inset: 0; }
+  svg line { stroke: var(--gray-500); stroke-width: 1.6; }
+  svg circle { fill: var(--orange); stroke: none; }
+  .co { position: absolute; font-size: 19px; line-height: 1.5; color: var(--ink); white-space: nowrap; }
+  .name { position: absolute; left: 0; right: 0; top: 1560px; text-align: center; }
+  .name h1 { font-family: "Satoshi"; font-weight: 900; font-size: 52px; letter-spacing: .01em; text-transform: uppercase; }
+  .name .label { font-size: 18px; margin-top: 16px; color: var(--gray-700); }
+</style></head>
+<body>
+<div class="ad story">
+  <img class="mk" src="sizechart/mockup_front@3x.png">
+  <span class="wm"></span>
+  <svg viewBox="0 0 1080 1920"><line x1="717" y1="504" x2="1040" y2="504"/><line x1="717" y1="504" x2="436" y2="616"/><circle cx="436" cy="616" r="5"/><line x1="717" y1="784" x2="1040" y2="784"/><line x1="717" y1="784" x2="340" y2="805"/><circle cx="340" cy="805" r="5"/><line x1="717" y1="1064" x2="1040" y2="1064"/><line x1="717" y1="1064" x2="127" y2="943"/><circle cx="127" cy="943" r="5"/><line x1="717" y1="1344" x2="1040" y2="1344"/><line x1="717" y1="1344" x2="618" y2="1343"/><circle cx="618" cy="1343" r="5"/></svg>
+  <div class="co label" style="left:719px;top:440px">Premium cotton<br>melton fleece</div><div class="co label" style="left:719px;top:720px">Puff-print<br>Arabic chest logo</div><div class="co label" style="left:719px;top:1000px">Silk-screen print<br>front &amp; back</div><div class="co label" style="left:719px;top:1280px">Ribbed collar,<br>cuffs &amp; hem</div>
+  <div class="name"><h1>Black Dragon Crewneck</h1><div class="label">Best seller · pre-order now · theclocal.com</div></div>
+</div>
+</body></html>
