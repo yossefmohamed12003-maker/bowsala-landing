@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Ref: Cave "Ruin crewneck" — 3-up product row (front / detail / back), name block left, duo shot right, slim footer */
+  .ad { background: var(--cream-tint); color: var(--ink); }
+  .tile { position: absolute; top: 40px; width: 324px; height: 500px; }
+  .t1 { left: 40px; } .t2 { left: 378px; } .t3 { left: 716px; }
+  .cap { position: absolute; top: 552px; font-size: 14px; color: var(--gray-500); }
+  .c1 { left: 40px; } .c2 { right: 40px; }
+  .duo { left: 470px; top: 610px; width: 570px; height: 640px; }
+  .name { position: absolute; left: 40px; top: 860px; width: 400px; }
+  .name h1 { font-family: "Satoshi"; font-weight: 900; font-size: 60px; line-height: .92; letter-spacing: -.03em; text-transform: uppercase; }
+  .name .label { font-size: 16px; color: var(--ink); margin-top: 18px; }
+  .name .label b { color: var(--blue); font-weight: 600; }
+  .name .btn { margin-top: 28px; }
+  .foot { position: absolute; left: 40px; right: 40px; bottom: 34px; display: flex; justify-content: space-between; align-items: center; }
+  .foot .wm { width: 130px; color: var(--blue); }
+  .foot .label { font-size: 14px; color: var(--ink); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo tile t1" data-src="photos/carousel/c3.jpg" data-crop="90,170,680"></div>
+  <div class="photo tile t2" data-src="photos/carousel/c6.jpg" data-crop="220,330,560"></div>
+  <div class="photo tile t3" data-src="photos/p05_man_back_sky.jpg" data-crop="250,80,900"></div>
+  <span class="label cap c1">Restock drop</span>
+  <span class="label cap c2">Crewneck</span>
+  <div class="name">
+    <h1>Black Dragon<br>Crewneck</h1>
+    <div class="label">Best seller — <b>back on pre-order</b></div>
+    <span class="btn sm">Pre-order now →</span>
+  </div>
+  <div class="photo duo" data-src="photos/p06_duo_backs_rooftop.jpg" data-crop="150,340,1040"></div>
+  <div class="foot"><span class="wm"></span><span class="label">Get yours on pre-order — theclocal.com</span></div>
+</div>
+<script src="crop.js"></script>
+</body></html>
