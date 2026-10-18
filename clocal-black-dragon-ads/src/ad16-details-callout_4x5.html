@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Ref: Aire polo — hero cut-out right, framed detail insets left wired to points on the garment */
+  .ad { background: #EDEAE4; color: var(--ink); }
+  .hero { position: absolute; left: 192px; top: -548px; width: 1065px;
+          -webkit-mask-image: linear-gradient(180deg,#000 88%,transparent 100%); mask-image: linear-gradient(180deg,#000 88%,transparent 100%); }
+  .wm { position: absolute; left: 40px; top: 44px; width: 150px; color: var(--blue); }
+  .ins { outline: 2px solid var(--ink); outline-offset: 6px; }
+  svg { position: absolute; inset: 0; }
+  svg line { stroke: #8C857A; stroke-width: 2; }
+  svg .dot { fill: var(--orange); }
+  svg .ring { fill: none; stroke: var(--cream); stroke-width: 2; }
+  .cap { position: absolute; display: flex; flex-direction: column; gap: 4px; }
+  .cap .n { font-size: 13px; color: var(--orange); }
+  .cap .t { font-size: 16px; font-weight: 600; }
+  .cap .s { font-size: 13px; color: var(--gray-500); }
+  .name { position: absolute; left: 40px; top: 1150px; }
+  .name h1 { font-family: "Satoshi"; font-weight: 900; font-size: 42px; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; }
+  .name .label { font-size: 14px; margin-top: 10px; }
+  .name .label b { color: var(--blue); font-weight: 600; }
+  .btn { position: absolute; right: 40px; bottom: 44px; }
+</style></head>
+<body>
+<div class="ad">
+  <img class="hero" src="photos/cutouts/p17_man_front_rooftop.png">
+  <span class="wm"></span>
+  <div class="photo ins" style="left:40px;top:150px;width:330px;height:210px" data-src="photos/p05_man_back_sky.jpg" data-crop="320,660,620"></div><div class="cap" style="left:40px;top:374px"><span class="label n">01</span><span class="label t">Dragon back print</span><span class="label s">Silk-screen · back</span></div><div class="photo ins" style="left:40px;top:450px;width:330px;height:210px" data-src="photos/p17_man_front_rooftop.jpg" data-crop="860,1265,420"></div><div class="cap" style="left:40px;top:674px"><span class="label n">02</span><span class="label t">Puff-print Arabic logo</span><span class="label s">Left chest</span></div><div class="photo ins" style="left:40px;top:750px;width:330px;height:210px" data-src="photos/p17_man_front_rooftop.jpg" data-crop="560,1420,520"></div><div class="cap" style="left:40px;top:974px"><span class="label n">03</span><span class="label t">Front graphic</span><span class="label s">Silk-screen</span></div>
+  <svg viewBox="0 0 1080 1350"><line x1="378" y1="255" x2="760" y2="134"/><circle cx="760" cy="134" r="7" class="dot"/><circle cx="760" cy="134" r="15" class="ring"/><line x1="378" y1="555" x2="855" y2="331"/><circle cx="855" cy="331" r="7" class="dot"/><circle cx="855" cy="331" r="15" class="ring"/><line x1="378" y1="855" x2="626" y2="469"/><circle cx="626" cy="469" r="7" class="dot"/><circle cx="626" cy="469" r="15" class="ring"/></svg>
+  <div class="name"><h1>Black Dragon<br>Crewneck</h1><div class="label">Boxy fit · cotton melton fleece · <b>best seller restock</b></div></div>
+  <span class="btn">Pre-order now →</span>
+</div>
+<script src="crop.js"></script>
+</body></html>
