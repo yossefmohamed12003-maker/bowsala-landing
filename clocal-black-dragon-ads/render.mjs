@@ -26,7 +26,7 @@ const filter = process.argv[2] || '';
 const pages = (await readdir(root)).filter((f) => f.endsWith('.html') && f.includes(filter));
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
 for (const f of pages) {
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: scale });
+  const page = await browser.newPage({ viewport: { width: 2400, height: 1920 }, deviceScaleFactor: scale });
   await page.goto(`http://localhost:${port}/${f}`);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForFunction(() => [...document.querySelectorAll('.photo[data-src]')].every((p) => p.dataset.ready));

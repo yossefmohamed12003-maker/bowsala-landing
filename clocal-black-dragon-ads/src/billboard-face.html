@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  /* Billboard face artwork (3:1). Ref: Hello Molly billboard — script + bold hook left, model right */
+  .ad { width: 2400px; height: 800px; background: var(--ink); color: var(--cream); }
+  .ph { position: absolute; left: 1250px; top: 0; width: 1150px; height: 800px; -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 22%); mask-image: linear-gradient(90deg,transparent 0,#000 22%); }
+  .hook { position: absolute; left: 110px; top: 150px; }
+  .hook .k { font-family: "Satoshi"; font-weight: 900; font-size: 168px; line-height: .9; letter-spacing: -.04em; }
+  .hook .k span { color: #6B55FF; }
+  .hook .label { font-size: 30px; color: var(--gray-300); margin-top: 44px; display: flex; align-items: center; gap: 18px; }
+  .wm { position: absolute; left: 110px; bottom: 80px; width: 260px; color: var(--cream); }
+  .site { position: absolute; left: 420px; bottom: 92px; font-size: 26px; color: var(--gray-300); }
+</style></head>
+<body>
+<div class="ad">
+  <div class="photo ph" data-src="photos/p05_man_back_sky.jpg" data-crop="0,140,1333"></div>
+  <div class="hook">
+    <div class="k">You saw it.<br>You missed it.<br><span>Not twice.</span></div>
+  </div>
+  <span class="wm"></span>
+  <span class="label site">Black Dragon Crewneck · pre-order now · theclocal.com</span>
+</div>
+<script src="crop.js"></script>
+</body></html>
